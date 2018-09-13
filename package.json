@@ -1,0 +1,26 @@
+{
+  "name": "vue-cinema",
+  "version": "1.0.0",
+  "description": "My bedazzling Nuxt.js project",
+  "author": "R4z1ell",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "normalize.css": "^8.0.0",
+    "nuxt": "^1.0.0",
+    "vue-clickaway": "^2.2.2",
+    "vue-js-modal": "^1.3.26",
+    "vue-star-rating": "^1.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0"
+  }
+}

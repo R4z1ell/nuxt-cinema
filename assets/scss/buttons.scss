@@ -1,0 +1,49 @@
+@mixin btn {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: 225px;
+  height: 63px;
+  color: $color-white;
+  font-size: 19px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn {
+  @include btn;
+}
+
+// X Button
+
+@mixin btn-cross($color, $height: 21px) {
+  cursor: pointer;
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 32px;
+  height: 32px;
+  opacity: 1;
+
+  &:before,
+  &:after {
+    position: absolute;
+    top: -3px;
+    left: 15px;
+    content: " ";
+    height: $height;
+    width: 3px;
+    background-color: $color;
+    border-radius: 5px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
