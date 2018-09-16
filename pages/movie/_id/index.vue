@@ -19,8 +19,7 @@
         </h1>
         <h3 class="movie__genre"> 
           {{ this.movie[0].genres[0].name }} {{ checkIfTwoGenres }} {{ checkIfGenreTwo }} 
-          &nbsp; &#8901; &nbsp; {{ checkRelease }} &nbsp; &#8901; &nbsp;
-          {{ checkRuntime | runtime }}
+          &nbsp; &#8901; &nbsp; {{ checkRelease }} &nbsp; &#8901; &nbsp; {{ checkRuntime | runtime }}
         </h3>
         <img :src="image" alt="poster" class="movie__poster">
       </div>
@@ -50,7 +49,7 @@
             <textarea class="movie__textarea" spellcheck="false"></textarea>
             <button class="movie__btn-submit" :style="checkIfReview">Submit</button>
           </div>
-        </div>
+        </div> 
         <Comment v-for="(comment, index) in this.movie[0].reviews.results" :key="index" :comment="comment" />
       </div>
     </div>
@@ -153,7 +152,11 @@ export default {
       }
     },
     checkRuntime() {
-      if (this.movie[0].runtime) {
+      if (
+        this.$route.query.link !== "/tv-shows/popular" &&
+        this.$route.query.link !== "/tv-shows/top-rated" &&
+        this.$route.query.link !== "/tv-shows/on-air"
+      ) {
         return this.movie[0].runtime;
       } else {
         return this.movie[0].episode_run_time[0];

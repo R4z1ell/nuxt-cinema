@@ -57,6 +57,9 @@ const createStore = () => {
       setMovies(state, movies) {
         state.movies = movies;
       },
+      pushMovies(state, movies) {
+        state.movies = state.movies.concat(movies);
+      },
       setWatchlist(state, movie) {
         state.watchlist = state.watchlist.concat(movie);
       },

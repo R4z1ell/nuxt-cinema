@@ -2,7 +2,12 @@
   <div :class="{ 'page-full': isActive, 'page-detail': !isActive }">
     <Movies v-if="!view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
     <detailed-view  v-if="view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
-  </div>
+    <div class="next-page">
+      <svg version="1.1" @click="nextPage" class="next-page__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 426.667 426.667" style="enable-background:new 0 0 426.667 426.667;" xml:space="preserve">
+        <path class="next-page__path" d="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333 s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M341.333,251.733h-89.6v89.6h-76.8v-89.6h-89.6v-76.8h89.6v-89.6h76.8v89.6 h89.6V251.733z"/>
+      </svg>
+    </div>
+  </div> 
 </template>
 
 <script>
@@ -11,9 +16,32 @@ import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
 
 export default {
+  data() {
+    return {
+      currentPage: 2
+    };
+  },
   components: {
     Movies,
     DetailedView
+  },
+  methods: {
+    nextPage() {
+      axios
+        .get(
+          "movie/popular?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=" +
+            this.currentPage
+        )
+        .then(res => {
+          this.$store.commit("pushMovies", res.data.results);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.currentPage++;
+    }
   },
   computed: {
     movies() {
@@ -59,14 +87,35 @@ export default {
 @import "../assets/scss/base";
 @import "../assets/scss/variables";
 
+.next-page {
+  text-align: center;
+  width: 95vw;
+  margin-top: -20px;
+  margin-bottom: 15px;
+
+  &__icon {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+  }
+
+  &__path {
+    fill: #00d474;
+    transition: all 0.2s;
+
+    &:hover {
+      fill: darken(#00d474, 15%);
+    }
+  }
+}
+
 .page-full {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(5, 332.5px);
   grid-gap: 40px;
   padding: 40px;
-  height: 100%;
-  background-color: $color-primary;
-  transform: translateY(15.2%);
+  height: 100vh;
+  transform: translateY(19.6%);
 
   @media (max-width: 1500px) {
     grid-template-columns: repeat(5, 1fr);
@@ -92,9 +141,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   padding: 40px;
-  height: 100%;
-  background-color: $color-primary;
-  transform: translateY(2.46%);
+  height: 100vh;
+  transform: translateY(19.6%);
 }
 </style>
 

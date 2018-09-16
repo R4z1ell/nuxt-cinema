@@ -50,12 +50,12 @@ export default {
   flex-direction: column;
 
   &__image {
-    height: 338px;
-    width: 226px;
+    height: 490.5px;
+    width: 327px;
     transition: transform 0.3s;
 
     &:hover {
-      transform: scale(1.04);
+      transform: scale(1.03);
       cursor: pointer;
     }
   }
