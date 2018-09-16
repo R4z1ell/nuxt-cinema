@@ -10,6 +10,7 @@ const createStore = () => {
       watchlist: [],
       backdrops: [],
       fullMovie: [],
+      infoMovie: [],
       topRated: null,
       upcoming: null,
       nowPlaying: null,
@@ -62,6 +63,9 @@ const createStore = () => {
       },
       setWatchlist(state, movie) {
         state.watchlist = state.watchlist.concat(movie);
+      },
+      setInfoMovie(state, movie) {
+        state.infoMovie = state.infoMovie.concat(movie);
       },
       removeFromWatchlist(state, movieIndex) {
         state.watchlist.splice(movieIndex, 1);

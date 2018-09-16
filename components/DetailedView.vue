@@ -11,7 +11,7 @@
         <p class="view__genre">
           {{ this.movie.genre_ids[0] | genre }} {{ checkIfTwoGenres }} {{ this.movie.genre_ids[1] | genre }} 
           &nbsp; &#8901; &nbsp; {{ checkReleaseDate }} &nbsp; &#8901; &nbsp;
-          {{ this.movie.runtime | runtime }}
+          {{ checkRuntime | runtime }}
         </p>
         <div class="view__stars">
           <circle-bar style="margin-left: 27px" :rating="voteAverage"></circle-bar>
@@ -85,14 +85,29 @@ export default {
         return "/ ";
       }
     },
+    checkRuntime() {
+      const id = this.movie.id;
+      const result = this.$store.state.infoMovie.filter(movie => {
+        return movie.id === id;
+      });
+      if (result.length > 0) {
+        return result[0].runtime;
+      } else {
+        return "";
+      }
+    },
     voteAverage() {
       return this.movie.vote_average * 10;
     }
   },
   methods: {
     showTrailer() {
+      const id = this.movie.id;
+      const result = this.$store.state.infoMovie.filter(movie => {
+        return movie.id === id;
+      });
       this.$modal.show("youtube-trailer-detail", {
-        youtubeId: this.movie.trailerId
+        youtubeId: result[0].trailerId
       });
     },
     checkWatchlist(movieTitle) {
