@@ -16,6 +16,10 @@ import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
 
 export default {
+  /*
+   ! Create a currentPage inside the store because this one below doesn't work when we visit a specific movie page
+   ! and then return back on this page and click the next page button again 
+  */
   data() {
     return {
       currentPage: 2
@@ -24,6 +28,17 @@ export default {
   components: {
     Movies,
     DetailedView
+  },
+  computed: {
+    movies() {
+      return this.$store.getters.getMovies;
+    },
+    view() {
+      return this.$store.getters.viewState;
+    },
+    isActive() {
+      return this.$store.state.isActive;
+    }
   },
   methods: {
     nextPage() {
@@ -60,17 +75,6 @@ export default {
           console.log(error);
         });
       this.currentPage++;
-    }
-  },
-  computed: {
-    movies() {
-      return this.$store.getters.getMovies;
-    },
-    view() {
-      return this.$store.getters.viewState;
-    },
-    isActive() {
-      return this.$store.state.isActive;
     }
   },
   mounted() {

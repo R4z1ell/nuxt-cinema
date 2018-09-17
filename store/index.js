@@ -6,6 +6,8 @@ const createStore = () => {
     state: {
       view: false,
       isActive: true,
+      firstLoadTopRated: true,
+      firstLoadUpcoming: true,
       movies: null,
       watchlist: [],
       backdrops: [],
@@ -60,6 +62,12 @@ const createStore = () => {
       },
       pushMovies(state, movies) {
         state.movies = state.movies.concat(movies);
+      },
+      pushTopRated(state, movies) {
+        state.topRated = state.topRated.concat(movies);
+      },
+      pushUpcoming(state, movies) {
+        state.upcoming = state.upcoming.concat(movies);
       },
       setWatchlist(state, movie) {
         state.watchlist = state.watchlist.concat(movie);
@@ -166,6 +174,12 @@ const createStore = () => {
       },
       pageDetail: state => {
         state.isActive = false;
+      },
+      setFirstLoadTopRated: state => {
+        state.firstLoadTopRated = false;
+      },
+      setFirstLoadUpcoming: state => {
+        state.firstLoadUpcoming = false;
       }
     },
     actions: {

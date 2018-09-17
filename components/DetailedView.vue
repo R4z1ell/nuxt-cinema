@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <div class="view">
+  <div class="main"> 
+    <div class="view" :style="[checkIfLastComponent ? {'margin': '25px 0 10px 0'} : {'margin': '25px 0 40px 0'}]">
       <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
         <img :src="image" alt="movie-image" class="view__image">
       </nuxt-link>
@@ -39,7 +39,7 @@
         </p>
       </div>
     </div>
-    <span class="view__split"></span>
+    <span class="view__split" :style="[checkIfLastComponent ? {'height': '0px'} : {'height': '1px'}]"></span>
   </div>
 </template>
 
@@ -94,6 +94,16 @@ export default {
         return result[0].runtime;
       } else {
         return "";
+      }
+    },
+    checkIfLastComponent() {
+      if (
+        this.movie.id ===
+        this.$store.state.movies[this.$store.state.movies.length - 1].id
+      ) {
+        return true;
+      } else {
+        return false;
       }
     },
     voteAverage() {
