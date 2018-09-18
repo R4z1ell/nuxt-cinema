@@ -16,14 +16,9 @@ import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
 
 export default {
-  /*
-    ! Create a currentPage inside the store because this one below doesn't work when we visit a specific movie page
-    ! and then return back on this page and click the next page button again 
-  */
-  data() {
-    return {
-      currentPage: 2
-    };
+  components: {
+    Movies,
+    DetailedView
   },
   methods: {
     nextPage() {
@@ -32,7 +27,7 @@ export default {
           "movie/upcoming?api_key=" +
             process.env.apiKey +
             "&language=en-US&page=" +
-            this.currentPage
+            this.$store.state.currentPageUpcoming
         )
         .then(res => {
           this.$store.commit("pushUpcoming", res.data.results);
@@ -59,12 +54,8 @@ export default {
         .catch(error => {
           console.log(error);
         });
-      this.currentPage++;
+      this.$store.commit("setCurrentPageUpcoming");
     }
-  },
-  components: {
-    Movies,
-    DetailedView
   },
   computed: {
     movies() {
@@ -75,25 +66,6 @@ export default {
     },
     isActive() {
       return this.$store.state.isActive;
-    }
-  },
-  asyncData({ store }) {
-    if (store.state.upcoming === null) {
-      return axios
-        .get(
-          "movie/upcoming?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        )
-        .then(res => {
-          const upcomingArray = [];
-          upcomingArray.push(...res.data.results);
-          store.commit("getUpcoming", upcomingArray);
-          return { upcomingMovies: upcomingArray };
-        })
-        .catch(error => {
-          console.log(error);
-        });
     }
   },
   mounted() {

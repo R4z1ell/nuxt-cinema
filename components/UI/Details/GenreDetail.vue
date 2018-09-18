@@ -7,7 +7,6 @@
       <nuxt-link :to="{ path: animation }" @click.native="changeView" class="genre-detail__animation">Animation</nuxt-link>
       <nuxt-link :to="{ path: comedy }" @click.native="changeView" class="genre-detail__comedy">Comedy</nuxt-link>
       <nuxt-link :to="{ path: crime }" @click.native="changeView" class="genre-detail__crime">Crime</nuxt-link>
-      <nuxt-link :to="{ path: documentary }" @click.native="changeView" class="genre-detail__doc">Documentary</nuxt-link>
       <nuxt-link :to="{ path: drama }" @click.native="changeView" class="genre-detail__drama">Drama</nuxt-link>
       <nuxt-link :to="{ path: family }" @click.native="changeView" class="genre-detail__family">Family</nuxt-link>
       <nuxt-link :to="{ path: fantasy }" @click.native="changeView" class="genre-detail__fantasy">Fantasy</nuxt-link>
@@ -49,9 +48,6 @@ export default {
     },
     crime() {
       return "/movie/genre/crime";
-    },
-    documentary() {
-      return "/movie/genre/documentary";
     },
     drama() {
       return "/movie/genre/drama";

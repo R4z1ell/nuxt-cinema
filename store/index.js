@@ -8,6 +8,28 @@ const createStore = () => {
       isActive: true,
       firstLoadTopRated: true,
       firstLoadUpcoming: true,
+      firstLoadNowPlaying: true,
+      firstLoadTvPopular: true,
+      firstLoadTvTopRated: true,
+      firstLoadTvOnAir: true,
+      firstLoadAction: true,
+      firstLoadAdventure: true,
+      firstLoadAnimation: true,
+      firstLoadComedy: true,
+      firstLoadCrime: true,
+      firstLoadDrama: true,
+      firstLoadFamily: true,
+      firstLoadFantasy: true,
+      firstLoadHistory: true,
+      firstLoadHorror: true,
+      firstLoadMusic: true,
+      firstLoadMystery: true,
+      firstLoadRomance: true,
+      firstLoadScienceFiction: true,
+      firstLoadTvMovie: true,
+      firstLoadThriller: true,
+      firstLoadWar: true,
+      firstLoadWestern: true,
       movies: null,
       watchlist: [],
       backdrops: [],
@@ -16,6 +38,9 @@ const createStore = () => {
       topRated: null,
       upcoming: null,
       nowPlaying: null,
+      tvPopular: null,
+      tvTopRated: null,
+      tvOnAir: null,
       action: null,
       adventure: null,
       animation: null,
@@ -35,9 +60,31 @@ const createStore = () => {
       thriller: null,
       war: null,
       western: null,
-      tvPopular: null,
-      tvTopRated: null,
-      tvOnAir: null
+      currentPagePopular: 2,
+      currentPageTopRated: 2,
+      currentPageUpcoming: 2,
+      currentPageNowPlaying: 2,
+      currentPageTvPopular: 2,
+      currentPageTvTopRated: 2,
+      currentPageTvOnAir: 2,
+      currentPageAction: 2,
+      currentPageAdventure: 2,
+      currentPageAnimation: 2,
+      currentPageComedy: 2,
+      currentPageCrime: 2,
+      currentPageDrama: 2,
+      currentPageFamily: 2,
+      currentPageFantasy: 2,
+      currentPageHistory: 2,
+      currentPageHorror: 2,
+      currentPageMusic: 2,
+      currentPageMystery: 2,
+      currentPageRomance: 2,
+      currentPageScienceFiction: 2,
+      currentPageTvMovie: 2,
+      currentPageThriller: 2,
+      currentPageWar: 2,
+      currentPageWestern: 2
     },
     getters: {
       viewState(state) {
@@ -68,6 +115,72 @@ const createStore = () => {
       },
       pushUpcoming(state, movies) {
         state.upcoming = state.upcoming.concat(movies);
+      },
+      pushNowPlaying(state, movies) {
+        state.nowPlaying = state.nowPlaying.concat(movies);
+      },
+      pushTvPopular(state, movies) {
+        state.tvPopular = state.tvPopular.concat(movies);
+      },
+      pushTvTopRated(state, movies) {
+        state.tvTopRated = state.tvTopRated.concat(movies);
+      },
+      pushTvOnAir(state, movies) {
+        state.tvOnAir = state.tvOnAir.concat(movies);
+      },
+      pushAction(state, movies) {
+        state.action = state.action.concat(movies);
+      },
+      pushAdventure(state, movies) {
+        state.adventure = state.adventure.concat(movies);
+      },
+      pushAnimation(state, movies) {
+        state.animation = state.animation.concat(movies);
+      },
+      pushComedy(state, movies) {
+        state.comedy = state.comedy.concat(movies);
+      },
+      pushCrime(state, movies) {
+        state.crime = state.crime.concat(movies);
+      },
+      pushDrama(state, movies) {
+        state.drama = state.drama.concat(movies);
+      },
+      pushFamily(state, movies) {
+        state.family = state.family.concat(movies);
+      },
+      pushFantasy(state, movies) {
+        state.fantasy = state.fantasy.concat(movies);
+      },
+      pushHistory(state, movies) {
+        state.history = state.history.concat(movies);
+      },
+      pushHorror(state, movies) {
+        state.horror = state.horror.concat(movies);
+      },
+      pushMusic(state, movies) {
+        state.music = state.music.concat(movies);
+      },
+      pushMystery(state, movies) {
+        state.mystery = state.mystery.concat(movies);
+      },
+      pushRomance(state, movies) {
+        state.romance = state.romance.concat(movies);
+      },
+      pushScienceFiction(state, movies) {
+        state.scienceFiction = state.scienceFiction.concat(movies);
+      },
+      pushTvMovie(state, movies) {
+        state.tvMovie = state.tvMovie.concat(movies);
+      },
+      pushThriller(state, movies) {
+        state.thriller = state.thriller.concat(movies);
+      },
+      pushWar(state, movies) {
+        state.war = state.war.concat(movies);
+      },
+      pushWestern(state, movies) {
+        state.western = state.western.concat(movies);
       },
       setWatchlist(state, movie) {
         state.watchlist = state.watchlist.concat(movie);
@@ -180,27 +293,301 @@ const createStore = () => {
       },
       setFirstLoadUpcoming: state => {
         state.firstLoadUpcoming = false;
+      },
+      setFirstLoadNowPlaying: state => {
+        state.firstLoadNowPlaying = false;
+      },
+      setFirstLoadTvPopular: state => {
+        state.firstLoadTvPopular = false;
+      },
+      setFirstLoadTvTopRated: state => {
+        state.firstLoadTvTopRated = false;
+      },
+      setFirstLoadTvOnAir: state => {
+        state.firstLoadTvOnAir = false;
+      },
+      setFirstLoadAction: state => {
+        state.firstLoadAction = false;
+      },
+      setFirstLoadAdventure: state => {
+        state.firstLoadAdventure = false;
+      },
+      setFirstLoadAnimation: state => {
+        state.firstLoadAnimation = false;
+      },
+      setFirstLoadComedy: state => {
+        state.firstLoadComedy = false;
+      },
+      setFirstLoadCrime: state => {
+        state.firstLoadCrime = false;
+      },
+      setFirstLoadDrama: state => {
+        state.firstLoadDrama = false;
+      },
+      setFirstLoadFamily: state => {
+        state.firstLoadFamily = false;
+      },
+      setFirstLoadFantasy: state => {
+        state.firstLoadFantasy = false;
+      },
+      setFirstLoadHistory: state => {
+        state.firstLoadHistory = false;
+      },
+      setFirstLoadHorror: state => {
+        state.firstLoadHorror = false;
+      },
+      setFirstLoadMusic: state => {
+        state.firstLoadMusic = false;
+      },
+      setFirstLoadMystery: state => {
+        state.firstLoadMystery = false;
+      },
+      setFirstLoadRomance: state => {
+        state.firstLoadRomance = false;
+      },
+      setFirstLoadScienceFiction: state => {
+        state.firstLoadScienceFiction = false;
+      },
+      setFirstLoadTvMovie: state => {
+        state.firstLoadTvMovie = false;
+      },
+      setFirstLoadThriller: state => {
+        state.firstLoadThriller = false;
+      },
+      setFirstLoadWar: state => {
+        state.firstLoadWar = false;
+      },
+      setFirstLoadWestern: state => {
+        state.firstLoadWestern = false;
+      },
+      setCurrentPagePopular: state => {
+        state.currentPagePopular++;
+      },
+      setCurrentPageTopRated: state => {
+        state.currentPageTopRated++;
+      },
+      setCurrentPageUpcoming: state => {
+        state.currentPageUpcoming++;
+      },
+      setCurrentPageNowPlaying: state => {
+        state.currentPageNowPlaying++;
+      },
+      setCurrentPageTvPopular: state => {
+        state.currentPageTvPopular++;
+      },
+      setCurrentPageTvTopRated: state => {
+        state.currentPageTvTopRated++;
+      },
+      setCurrentPageTvOnAir: state => {
+        state.currentPageTvOnAir++;
+      },
+      setCurrentPageAction: state => {
+        state.currentPageAction++;
+      },
+      setCurrentPageAdventure: state => {
+        state.currentPageAdventure++;
+      },
+      setCurrentPageAnimation: state => {
+        state.currentPageAnimation++;
+      },
+      setCurrentPageComedy: state => {
+        state.currentPageComedy++;
+      },
+      setCurrentPageCrime: state => {
+        state.currentPageCrime++;
+      },
+      setCurrentPageDrama: state => {
+        state.currentPageDrama++;
+      },
+      setCurrentPageFamily: state => {
+        state.currentPageFamily++;
+      },
+      setCurrentPageFantasy: state => {
+        state.currentPageFantasy++;
+      },
+      setCurrentPageHistory: state => {
+        state.currentPageHistory++;
+      },
+      setCurrentPageHorror: state => {
+        state.currentPageHorror++;
+      },
+      setCurrentPageMusic: state => {
+        state.currentPageMusic++;
+      },
+      setCurrentPageMystery: state => {
+        state.currentPageMystery++;
+      },
+      setCurrentPageRomance: state => {
+        state.currentPageRomance++;
+      },
+      setCurrentPageScienceFiction: state => {
+        state.currentPageScienceFiction++;
+      },
+      setCurrentPageTvMovie: state => {
+        state.currentPageTvMovie++;
+      },
+      setCurrentPageThriller: state => {
+        state.currentPageThriller++;
+      },
+      setCurrentPageWar: state => {
+        state.currentPageWar++;
+      },
+      setCurrentPageWestern: state => {
+        state.currentPageWestern++;
       }
     },
     actions: {
-      nuxtServerInit({ commit }) {
-        return axios
-          .get(
-            "movie/popular?api_key=" +
-              process.env.apiKey +
-              "&language=en-US&page=1"
-          )
-          .then(res => {
-            const moviesArray = [];
-            moviesArray.push(...res.data.results);
-            commit("setMovies", moviesArray);
-            //console.log(moviesArray);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+      async nuxtServerInit({ commit }) {
+        let res = await axios.get(
+          "movie/popular?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resTopRated = await axios.get(
+          "movie/top_rated?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resUpcoming = await axios.get(
+          "movie/upcoming?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resNowPlaying = await axios.get(
+          "movie/now_playing?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resTvPopular = await axios.get(
+          "tv/popular?api_key=" + process.env.apiKey + "&language=en-US&page=1"
+        );
+        let resTvTopRated = await axios.get(
+          "tv/top_rated?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resTvOnAir = await axios.get(
+          "tv/on_the_air?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=1"
+        );
+        let resAction = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=28"
+        );
+        let resAdventure = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=12"
+        );
+        let resAdnimation = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16"
+        );
+        let resComedy = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=35"
+        );
+        let resCrime = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=80"
+        );
+        let resDrama = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=18"
+        );
+        let resFamily = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10751"
+        );
+        let resFantasy = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=14"
+        );
+        let resHistory = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=36"
+        );
+        let resHorror = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=27"
+        );
+        let resMusic = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10402"
+        );
+        let resMystery = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=9648"
+        );
+        let resRomance = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749"
+        );
+        let resScienceFiction = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878"
+        );
+        let resTvMovie = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10770"
+        );
+        let resThriller = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=53"
+        );
+        let resWar = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10752"
+        );
+        let resWestern = await axios.get(
+          "discover/movie?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=37"
+        );
+        commit("setMovies", [...res.data.results]);
+        commit("getTopRated", [...resTopRated.data.results]);
+        commit("getUpcoming", [...resUpcoming.data.results]);
+        commit("getNowPlaying", [...resNowPlaying.data.results]);
+        commit("getTvPopular", [...resTvPopular.data.results]);
+        commit("getTvTopRated", [...resTvTopRated.data.results]);
+        commit("getTvOnAir", [...resTvOnAir.data.results]);
+        commit("getAction", [...resAction.data.results]);
+        commit("getAdventure", [...resAdventure.data.results]);
+        commit("getAnimation", [...resAdnimation.data.results]);
+        commit("getComedy", [...resComedy.data.results]);
+        commit("getCrime", [...resCrime.data.results]);
+        commit("getDrama", [...resDrama.data.results]);
+        commit("getFamily", [...resFamily.data.results]);
+        commit("getFantasy", [...resFantasy.data.results]);
+        commit("getHistory", [...resHistory.data.results]);
+        commit("getHorror", [...resHorror.data.results]);
+        commit("getMusic", [...resMusic.data.results]);
+        commit("getMystery", [...resMystery.data.results]);
+        commit("getRomance", [...resRomance.data.results]);
+        commit("getScienceFiction", [...resScienceFiction.data.results]);
+        commit("getTvMovie", [...resTvMovie.data.results]);
+        commit("getThriller", [...resThriller.data.results]);
+        commit("getWar", [...resWar.data.results]);
+        commit("getWestern", [...resWestern.data.results]);
       },
-      addToWatchlist({ commit }, id) {
+      addMovieToWatchlist({ commit }, id) {
         axios
           .get(
             "movie/" +
@@ -214,6 +601,31 @@ const createStore = () => {
             watchlistArray.push({
               img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
               title: res.data.title,
+              added: true,
+              trailerLink:
+                "https://www.youtube.com/embed/" +
+                res.data.videos.results[0].key
+            });
+            commit("setWatchlist", watchlistArray);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      addTvShowToWatchlist({ commit }, id) {
+        axios
+          .get(
+            "tv/" +
+              id +
+              "?api_key=" +
+              process.env.apiKey +
+              "&append_to_response=videos"
+          )
+          .then(res => {
+            const watchlistArray = [];
+            watchlistArray.push({
+              img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
+              title: res.data.original_name,
               added: true,
               trailerLink:
                 "https://www.youtube.com/embed/" +

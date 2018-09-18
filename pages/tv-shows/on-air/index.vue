@@ -2,6 +2,11 @@
   <div :class="{ 'page-full': isActive, 'page-detail': !isActive }">
     <Movies v-if="!view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
     <detailed-view  v-if="view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
+    <div class="next-page"> 
+      <svg version="1.1" @click="nextPage" class="next-page__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 426.667 426.667" style="enable-background:new 0 0 426.667 426.667;" xml:space="preserve">
+        <path class="next-page__path" d="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333 s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M341.333,251.733h-89.6v89.6h-76.8v-89.6h-89.6v-76.8h89.6v-89.6h76.8v89.6 h89.6V251.733z"/>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -15,7 +20,47 @@ export default {
     Movies,
     DetailedView
   },
+  methods: {
+    nextPage() {
+      axios
+        .get(
+          "tv/on_the_air?api_key=" +
+            process.env.apiKey +
+            "&language=en-US&page=" +
+            this.$store.state.currentPageTvOnAir
+        )
+        .then(res => {
+          this.$store.commit("pushTvOnAir", res.data.results);
+          for (const key in res.data.results) {
+            axios
+              .get(
+                "tv/" +
+                  res.data.results[key].id +
+                  "?api_key=" +
+                  process.env.apiKey +
+                  "&append_to_response=videos"
+              )
+              .then(res => {
+                const infoArray = [];
+                infoArray.push({
+                  id: res.data.id,
+                  runtime: res.data.episode_run_time[0],
+                  trailerId: res.data.videos.results[0].key
+                });
+                this.$store.commit("setInfoMovie", infoArray);
+              });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      this.$store.commit("setCurrentPageTvOnAir");
+    }
+  },
   computed: {
+    movies() {
+      return this.$store.state.tvOnAir;
+    },
     view() {
       return this.$store.getters.viewState;
     },
@@ -23,28 +68,9 @@ export default {
       return this.$store.state.isActive;
     }
   },
-  asyncData({ store }) {
-    if (store.state.tvOnAir === null) {
-      return axios
-        .get(
-          "tv/on_the_air?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        )
-        .then(res => {
-          const onAirTvArray = [];
-          onAirTvArray.push(...res.data.results);
-          store.commit("getTvOnAir", onAirTvArray);
-          return { movies: res.data.results };
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-  },
   mounted() {
-    if (!this.$store.state.tvOnAir[0].runtime) {
-      for (const key in this.$store.state.tvOnAir) {
+    if (this.$store.state.firstLoadTvOnAir) {
+      for (const key in this.movies) {
         axios
           .get(
             "tv/" +
@@ -54,12 +80,14 @@ export default {
               "&language=en-US&append_to_response=videos"
           )
           .then(res => {
-            this.movies[key].runtime = res.data.episode_run_time[0];
-            if (res.data.videos.results.length !== 0) {
-              this.movies[key].trailerId = res.data.videos.results[0].key;
-            } else {
-              this.movies[key].trailerId = "no-trailer";
-            }
+            const infoArray = [];
+            infoArray.push({
+              id: res.data.id,
+              runtime: res.data.episode_run_time[0],
+              trailerId: res.data.videos.results[0].key
+            });
+            this.$store.commit("setInfoMovie", infoArray);
+            this.$store.commit("setFirstLoadTvOnAir");
           })
           .catch(error => {
             console.log(error);

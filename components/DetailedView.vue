@@ -6,7 +6,7 @@
       </nuxt-link>
       <div class="wrapper">
         <div class="detail-title">
-          <h1 class="view__title">{{ movie.title }}</h1>
+          <h1 class="view__title">{{ checkTitle }}</h1>
         </div>
         <p class="view__genre">
           {{ this.movie.genre_ids[0] | genre }} {{ checkIfTwoGenres }} {{ this.movie.genre_ids[1] | genre }} 
@@ -96,14 +96,165 @@ export default {
         return "";
       }
     },
+    checkTitle() {
+      if (this.movie.title) {
+        return this.movie.title;
+      } else {
+        return this.movie.original_name;
+      }
+    },
     checkIfLastComponent() {
       if (
         this.movie.id ===
         this.$store.state.movies[this.$store.state.movies.length - 1].id
       ) {
         return true;
-      } else {
-        return false;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.topRated[this.$store.state.topRated.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.upcoming[this.$store.state.upcoming.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.nowPlaying[this.$store.state.nowPlaying.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.tvPopular[this.$store.state.tvPopular.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.tvTopRated[this.$store.state.tvTopRated.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.tvOnAir[this.$store.state.tvOnAir.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.action[this.$store.state.action.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.adventure[this.$store.state.adventure.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.animation[this.$store.state.animation.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.comedy[this.$store.state.comedy.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.crime[this.$store.state.crime.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.drama[this.$store.state.drama.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.family[this.$store.state.family.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.fantasy[this.$store.state.fantasy.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.history[this.$store.state.history.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.horror[this.$store.state.horror.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.music[this.$store.state.music.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.mystery[this.$store.state.mystery.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.romance[this.$store.state.romance.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.scienceFiction[
+          this.$store.state.scienceFiction.length - 1
+        ].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.tvMovie[this.$store.state.tvMovie.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.thriller[this.$store.state.thriller.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.war[this.$store.state.war.length - 1].id
+      ) {
+        return true;
+      }
+      if (
+        this.movie.id ===
+        this.$store.state.western[this.$store.state.western.length - 1].id
+      ) {
+        return true;
       }
     },
     voteAverage() {
@@ -133,7 +284,15 @@ export default {
         //console.log(value);
         this.$store.dispatch("removeFromWatchlist", movieIndex);
       } else {
-        this.$store.dispatch("addToWatchlist", this.movie.id);
+        if (
+          this.$route.path === "/tv-shows/popular" ||
+          this.$route.path === "/tv-shows/top-rated" ||
+          this.$route.path === "/tv-shows/on-air"
+        ) {
+          this.$store.dispatch("addTvShowToWatchlist", this.movie.id);
+        } else {
+          this.$store.dispatch("addMovieToWatchlist", this.movie.id);
+        }
       }
     }
   }
@@ -142,10 +301,6 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/variables";
-
-.stars {
-  margin: 7px 0 15px -2px;
-}
 
 .detail-title {
   display: flex;

@@ -16,15 +16,7 @@ import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
 
 export default {
-  /*
-   ! Create a currentPage inside the store because this one below doesn't work when we visit a specific movie page
-   ! and then return back on this page and click the next page button again 
-  */
-  data() {
-    return {
-      currentPage: 2
-    };
-  },
+  // ! Fix 'trailerId' inside 'nextPage' and 'mounted' when a movie doesn't have any trailer coming from the API
   components: {
     Movies,
     DetailedView
@@ -47,7 +39,7 @@ export default {
           "movie/popular?api_key=" +
             process.env.apiKey +
             "&language=en-US&page=" +
-            this.currentPage
+            this.$store.state.currentPagePopular
         )
         .then(res => {
           this.$store.commit("pushMovies", res.data.results);
@@ -74,7 +66,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-      this.currentPage++;
+      this.$store.commit("setCurrentPagePopular");
     }
   },
   mounted() {

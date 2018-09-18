@@ -2,6 +2,11 @@
   <div :class="{ 'page-full': isActive, 'page-detail': !isActive }">
     <Movies v-if="!view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
     <detailed-view  v-if="view" v-for="(movie, index) in movies" :key="index" :movie="movie" />
+    <div class="next-page"> 
+      <svg version="1.1" @click="nextPage" class="next-page__icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 426.667 426.667" style="enable-background:new 0 0 426.667 426.667;" xml:space="preserve">
+        <path class="next-page__path" d="M213.333,0C95.514,0,0,95.514,0,213.333s95.514,213.333,213.333,213.333 s213.333-95.514,213.333-213.333S331.153,0,213.333,0z M341.333,251.733h-89.6v89.6h-76.8v-89.6h-89.6v-76.8h89.6v-89.6h76.8v89.6 h89.6V251.733z"/>
+      </svg>
+    </div>
   </div>
 </template>
 
@@ -16,6 +21,9 @@ export default {
     DetailedView
   },
   computed: {
+    movies() {
+      return this.$store.state.music;
+    },
     view() {
       return this.$store.getters.viewState;
     },
@@ -23,28 +31,47 @@ export default {
       return this.$store.state.isActive;
     }
   },
-  asyncData({ store }) {
-    if (store.state.music === null) {
-      return axios
+  methods: {
+    nextPage() {
+      axios
         .get(
           "discover/movie?api_key=" +
             process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&with_genres=10402"
+            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
+            this.$store.state.currentPageMusic +
+            "&with_genres=10402"
         )
         .then(res => {
-          const musicArray = [];
-          musicArray.push(...res.data.results);
-          store.commit("getMusic", musicArray);
-          return { movies: res.data.results };
+          this.$store.commit("pushMusic", res.data.results);
+          for (const key in res.data.results) {
+            axios
+              .get(
+                "movie/" +
+                  res.data.results[key].id +
+                  "?api_key=" +
+                  process.env.apiKey +
+                  "&append_to_response=videos"
+              )
+              .then(res => {
+                const infoArray = [];
+                infoArray.push({
+                  id: res.data.id,
+                  runtime: res.data.runtime,
+                  trailerId: res.data.videos.results[0].key
+                });
+                this.$store.commit("setInfoMovie", infoArray);
+              });
+          }
         })
         .catch(error => {
           console.log(error);
         });
+      this.$store.commit("setCurrentPageMusic");
     }
   },
   mounted() {
-    if (!this.$store.state.music[0].runtime) {
-      for (const key in this.$store.state.music) {
+    if (this.$store.state.firstLoadMusic) {
+      for (const key in this.movies) {
         axios
           .get(
             "movie/" +
@@ -54,12 +81,14 @@ export default {
               "&append_to_response=videos"
           )
           .then(res => {
-            this.movies[key].runtime = res.data.runtime;
-            if (res.data.videos.results.length !== 0) {
-              this.movies[key].trailerId = res.data.videos.results[0].key;
-            } else {
-              this.movies[key].trailerId = "no-trailer";
-            }
+            const infoArray = [];
+            infoArray.push({
+              id: res.data.id,
+              runtime: res.data.runtime,
+              trailerId: res.data.videos.results[0].key
+            });
+            this.$store.commit("setInfoMovie", infoArray);
+            this.$store.commit("setFirstLoadMusic");
           })
           .catch(error => {
             console.log(error);
