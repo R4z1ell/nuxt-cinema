@@ -65,7 +65,11 @@ export default {
   },
   computed: {
     image() {
-      return "https://image.tmdb.org/t/p/w500" + this.movie.poster_path;
+      if (this.movie.poster_path) {
+        return "https://image.tmdb.org/t/p/w500" + this.movie.poster_path;
+      } else {
+        return "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
+      }
     },
     watchlist() {
       return this.$store.getters.getWatchlist;
@@ -267,9 +271,15 @@ export default {
       const result = this.$store.state.infoMovie.filter(movie => {
         return movie.id === id;
       });
-      this.$modal.show("youtube-trailer-detail", {
-        youtubeId: result[0].trailerId
-      });
+      if (Object.keys(result).length === 0) {
+        this.$modal.show("youtube-trailer-detail", {
+          youtubeId: "OCWj5xgu5Ng"
+        });
+      } else {
+        this.$modal.show("youtube-trailer-detail", {
+          youtubeId: result[0].trailerId
+        });
+      }
     },
     checkWatchlist(movieTitle) {
       return this.watchlist.some(el => {

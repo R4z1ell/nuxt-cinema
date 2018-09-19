@@ -16,7 +16,6 @@ import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
 
 export default {
-  // ! Fix 'trailerId' inside 'nextPage' and 'mounted' when a movie doesn't have any trailer coming from the API
   components: {
     Movies,
     DetailedView
@@ -43,6 +42,7 @@ export default {
         )
         .then(res => {
           this.$store.commit("pushMovies", res.data.results);
+          // ! Try to implement an async call for all these API requests to prevent 429 errors hopefully
           for (const key in res.data.results) {
             axios
               .get(

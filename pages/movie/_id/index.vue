@@ -116,6 +116,7 @@ export default {
         return "margin-top: 20px";
       }
     },
+    // ! Fix movie that have only one Cast member
     castStyle() {
       if (
         this.movie[0].credits.cast[0].name.length +
@@ -162,26 +163,34 @@ export default {
         return this.movie[0].episode_run_time[0];
       }
     },
-    checkTitleLength() {
-      if (this.movie[0].title) {
-        if (this.movie[0].title.length > 32) {
-          return "font-size: 25px";
-        } else {
-          return "font-size: 33px";
-        }
-      } else {
-        if (this.movie[0].episode_run_time[0].length > 32) {
-          return "font-size: 25px";
-        } else {
-          return "font-size: 33px";
-        }
-      }
-    },
+    // ! Fix when the 'this.movie[0].episode_run_time' is an EMPTY Object
+    // checkTitleLength() {
+    //   if (this.movie[0].title) {
+    //     if (this.movie[0].title.length > 32) {
+    //       return "font-size: 25px";
+    //     } else {
+    //       return "font-size: 33px";
+    //     }
+    //   } else {
+    //     if (
+    //       this.movie[0].episode_run_time[0].length > 32 &&
+    //       Object.keys(this.movie[0].episode_run_time).length !== 0
+    //     ) {
+    //       return "font-size: 25px";
+    //     } else {
+    //       return "font-size: 33px";
+    //     }
+    //   }
+    // },
     movie() {
       return this.$store.state.fullMovie;
     },
     image() {
-      return "https://image.tmdb.org/t/p/w500" + this.$route.query.img;
+      if (this.$route.query.img) {
+        return "https://image.tmdb.org/t/p/w500" + this.$route.query.img;
+      } else {
+        return "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
+      }
     }
   },
   components: {
