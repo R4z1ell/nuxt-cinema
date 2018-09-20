@@ -33,10 +33,20 @@
             <button-trailer class="movie__btn-trailer" @click="showTrailer" :style="checkIfComment">Watch Trailer</button-trailer>
             <button-ticket class="movie__btn-ticket" :style="checkIfComment">Buy Ticket</button-ticket>
           </div>
-          <p class="movie__cast" :style="castStyle">Cast:
-            <span class="movie__cast--char">&nbsp;&nbsp;{{ this.movie[0].credits.cast[0].name }},</span>
-            <span class="movie__cast--char">{{ this.movie[0].credits.cast[1].name }},</span>
-            <span class="movie__cast--char">{{ this.movie[0].credits.cast[2].name }}</span>
+          <p class="movie__cast" :style="castStyle" v-if="Object.keys(this.movie[0].credits.cast).length !== 0 ? true : false">
+            Cast:
+            <span class="movie__cast--char" 
+              v-if="Object.keys(this.movie[0].credits.cast).length >= 1 ? true : false">
+                &nbsp;&nbsp;{{ this.movie[0].credits.cast[0].name }} {{ checkIfOneCast }}
+            </span>
+            <span class="movie__cast--char" 
+              v-if="Object.keys(this.movie[0].credits.cast).length >= 2 ? true : false">
+                {{ this.movie[0].credits.cast[1].name }} {{ checkIfTwoCast }}
+            </span>
+            <span class="movie__cast--char" 
+              v-if="Object.keys(this.movie[0].credits.cast).length >= 3 ? true : false">
+                {{ this.movie[0].credits.cast[2].name }}
+            </span>
           </p>
         </div>
         <div class="movie__overview-container">
@@ -78,6 +88,16 @@ export default {
     }
   },
   computed: {
+    checkIfOneCast() {
+      if (Object.keys(this.movie[0].credits.cast).length > 1) {
+        return ",";
+      }
+    },
+    checkIfTwoCast() {
+      if (Object.keys(this.movie[0].credits.cast).length > 2) {
+        return ",";
+      }
+    },
     checkIfTwoGenres() {
       if (this.movie[0].genres.length >= 2) {
         return "/ ";
@@ -116,26 +136,14 @@ export default {
         return "margin-top: 20px";
       }
     },
-    // ! Fix movie that have only one Cast member
     castStyle() {
-      if (
-        this.movie[0].credits.cast[0].name.length +
-          this.movie[0].credits.cast[1].name.length +
-          this.movie[0].credits.cast[2].name.length >
-          44 &&
-        this.movie[0].reviews.results.length === 0 &&
-        this.movie[0].overview.length < 290
-      ) {
-        return "margin: 0 35px 0 150px";
-      } else {
-        return "margin: 0 35px 0 150px";
-      }
+      return "margin: 0 35px 0 150px";
     },
     checkIfTrailer() {
       if (this.movie[0].videos.results.length > 0) {
         return this.movie[0].videos.results[0].key;
       } else {
-        return "no-trailer";
+        return "OCWj5xgu5Ng";
       }
     },
     checkTitle() {
@@ -163,25 +171,27 @@ export default {
         return this.movie[0].episode_run_time[0];
       }
     },
-    // ! Fix when the 'this.movie[0].episode_run_time' is an EMPTY Object
-    // checkTitleLength() {
-    //   if (this.movie[0].title) {
-    //     if (this.movie[0].title.length > 32) {
-    //       return "font-size: 25px";
-    //     } else {
-    //       return "font-size: 33px";
-    //     }
-    //   } else {
-    //     if (
-    //       this.movie[0].episode_run_time[0].length > 32 &&
-    //       Object.keys(this.movie[0].episode_run_time).length !== 0
-    //     ) {
-    //       return "font-size: 25px";
-    //     } else {
-    //       return "font-size: 33px";
-    //     }
-    //   }
-    // },
+    checkTitleLength() {
+      if (
+        this.movie[0].title &&
+        this.movie[0].title.length > 32 &&
+        this.movie[0].title.length <= 40
+      ) {
+        return "font-size: 25px";
+      }
+      if (this.movie[0].title && this.movie[0].title.length > 40) {
+        return "font-size: 23px";
+      }
+      if (
+        this.movie[0].original_name &&
+        Object.keys(this.movie[0].original_name).length > 32 &&
+        Object.keys(this.movie[0].original_name).length !== 0
+      ) {
+        return "font-size: 25px";
+      } else {
+        return "font-size: 33px";
+      }
+    },
     movie() {
       return this.$store.state.fullMovie;
     },

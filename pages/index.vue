@@ -14,6 +14,7 @@
 import Movies from "@/components/Movies";
 import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
+import _ from "lodash";
 
 export default {
   components: {
@@ -31,67 +32,61 @@ export default {
       return this.$store.state.isActive;
     }
   },
+  // ! Add async-await for all the 'nextPage' methods of the other pages
   methods: {
-    nextPage() {
-      axios
-        .get(
-          "movie/popular?api_key=" +
+    async nextPage() {
+      let resMovie = await axios.get(
+        "movie/popular?api_key=" +
+          process.env.apiKey +
+          "&language=en-US&page=" +
+          this.$store.state.currentPagePopular
+      );
+      this.$store.commit("pushMovies", resMovie.data.results);
+
+      for (const key in resMovie.data.results) {
+        let resMovieVideo = await axios.get(
+          "movie/" +
+            resMovie.data.results[key].id +
+            "?api_key=" +
             process.env.apiKey +
-            "&language=en-US&page=" +
-            this.$store.state.currentPagePopular
-        )
-        .then(res => {
-          this.$store.commit("pushMovies", res.data.results);
-          // ! Try to implement an async call for all these API requests to prevent 429 errors hopefully
-          for (const key in res.data.results) {
-            axios
-              .get(
-                "movie/" +
-                  res.data.results[key].id +
-                  "?api_key=" +
-                  process.env.apiKey +
-                  "&append_to_response=videos"
-              )
-              .then(res => {
-                const infoArray = [];
-                infoArray.push({
-                  id: res.data.id,
-                  runtime: res.data.runtime,
-                  trailerId: res.data.videos.results[0].key
-                });
-                this.$store.commit("setInfoMovie", infoArray);
-              });
-          }
-        })
-        .catch(error => {
-          console.log(error);
+            "&append_to_response=videos"
+        );
+        const infoArray = [];
+        infoArray.push({
+          id: resMovieVideo.data.id,
+          runtime: resMovieVideo.data.runtime,
+          trailerId: resMovieVideo.data.videos.results[0].key
         });
+        this.$store.commit("setInfoMovie", infoArray);
+      }
       this.$store.commit("setCurrentPagePopular");
     }
   },
   mounted() {
     if (this.$store.state.infoMovie.length === 0) {
-      for (const key in this.movies) {
-        axios
-          .get(
-            "movie/" +
-              this.movies[key].id +
-              "?api_key=" +
-              process.env.apiKey +
-              "&append_to_response=videos"
-          )
-          .then(res => {
-            const infoArray = [];
-            infoArray.push({
-              id: res.data.id,
-              runtime: res.data.runtime,
-              trailerId: res.data.videos.results[0].key
+      for (const key in this.$store.state.movies) {
+        _.delay(() => {
+          axios
+            .get(
+              "movie/" +
+                this.$store.state.movies[key].id +
+                "?api_key=" +
+                process.env.apiKey +
+                "&append_to_response=videos"
+            )
+            .then(res => {
+              const infoArray = [];
+              infoArray.push({
+                id: res.data.id,
+                runtime: res.data.runtime,
+                trailerId: res.data.videos.results[0].key
+              });
+              this.$store.commit("setInfoMovie", infoArray);
+            })
+            .catch(error => {
+              console.log(error);
             });
-            this.$store.commit("setInfoMovie", infoArray);
-          })
-          .catch(error => {
-            console.log(error);
-          });
+        }, 9000);
       }
     }
   }

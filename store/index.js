@@ -46,7 +46,6 @@ const createStore = () => {
       animation: null,
       comedy: null,
       crime: null,
-      documentary: null,
       drama: null,
       family: null,
       fantasy: null,
@@ -438,129 +437,160 @@ const createStore = () => {
     },
     actions: {
       async nuxtServerInit({ commit }) {
-        let res = await axios.get(
-          "movie/popular?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resTopRated = await axios.get(
-          "movie/top_rated?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resUpcoming = await axios.get(
-          "movie/upcoming?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resNowPlaying = await axios.get(
-          "movie/now_playing?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resTvPopular = await axios.get(
-          "tv/popular?api_key=" + process.env.apiKey + "&language=en-US&page=1"
-        );
-        let resTvTopRated = await axios.get(
-          "tv/top_rated?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resTvOnAir = await axios.get(
-          "tv/on_the_air?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=1"
-        );
-        let resAction = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=28"
-        );
-        let resAdventure = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=12"
-        );
-        let resAdnimation = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16"
-        );
-        let resComedy = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=35"
-        );
-        let resCrime = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=80"
-        );
-        let resDrama = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=18"
-        );
-        let resFamily = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10751"
-        );
-        let resFantasy = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=14"
-        );
-        let resHistory = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=36"
-        );
-        let resHorror = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=27"
-        );
-        let resMusic = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10402"
-        );
-        let resMystery = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=9648"
-        );
-        let resRomance = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749"
-        );
-        let resScienceFiction = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878"
-        );
-        let resTvMovie = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10770"
-        );
-        let resThriller = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=53"
-        );
-        let resWar = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10752"
-        );
-        let resWestern = await axios.get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=37"
-        );
+        let [
+          res,
+          resTopRated,
+          resUpcoming,
+          resNowPlaying,
+          resTvPopular,
+          resTvTopRated,
+          resTvOnAir,
+          resAction,
+          resAdventure,
+          resAnimation,
+          resComedy,
+          resCrime,
+          resDrama,
+          resFamily,
+          resFantasy,
+          resHistory,
+          resHorror,
+          resMusic,
+          resMystery,
+          resRomance,
+          resScienceFiction,
+          resTvMovie,
+          resThriller,
+          resWar,
+          resWestern
+        ] = await Promise.all([
+          axios.get(
+            "movie/popular?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "movie/top_rated?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "movie/upcoming?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "movie/now_playing?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "tv/popular?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "tv/top_rated?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "tv/on_the_air?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&page=1"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=28"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=12"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=16"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=35"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=80"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=18"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10751"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=14"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=36"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=27"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10402"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=9648"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10749"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=878"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10770"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=53"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=10752"
+          ),
+          axios.get(
+            "discover/movie?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=37"
+          )
+        ]);
+
         commit("setMovies", [...res.data.results]);
         commit("getTopRated", [...resTopRated.data.results]);
         commit("getUpcoming", [...resUpcoming.data.results]);
@@ -570,7 +600,7 @@ const createStore = () => {
         commit("getTvOnAir", [...resTvOnAir.data.results]);
         commit("getAction", [...resAction.data.results]);
         commit("getAdventure", [...resAdventure.data.results]);
-        commit("getAnimation", [...resAdnimation.data.results]);
+        commit("getAnimation", [...resAnimation.data.results]);
         commit("getComedy", [...resComedy.data.results]);
         commit("getCrime", [...resCrime.data.results]);
         commit("getDrama", [...resDrama.data.results]);
@@ -598,14 +628,24 @@ const createStore = () => {
           )
           .then(res => {
             const watchlistArray = [];
-            watchlistArray.push({
-              img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
-              title: res.data.title,
-              added: true,
-              trailerLink:
-                "https://www.youtube.com/embed/" +
-                res.data.videos.results[0].key
-            });
+            if (Object.keys(res.data.videos.results).length !== 0) {
+              watchlistArray.push({
+                img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
+                title: res.data.title,
+                added: true,
+                trailerLink:
+                  "https://www.youtube.com/embed/" +
+                  res.data.videos.results[0].key
+              });
+            }
+            if (Object.keys(res.data.videos.results).length === 0) {
+              watchlistArray.push({
+                img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
+                title: res.data.title,
+                added: true,
+                trailerLink: "https://www.youtube.com/embed/OCWj5xgu5Ng"
+              });
+            }
             commit("setWatchlist", watchlistArray);
           })
           .catch(error => {
@@ -623,14 +663,24 @@ const createStore = () => {
           )
           .then(res => {
             const watchlistArray = [];
-            watchlistArray.push({
-              img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
-              title: res.data.original_name,
-              added: true,
-              trailerLink:
-                "https://www.youtube.com/embed/" +
-                res.data.videos.results[0].key
-            });
+            if (Object.keys(res.data.videos.results).length !== 0) {
+              watchlistArray.push({
+                img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
+                title: res.data.original_name,
+                added: true,
+                trailerLink:
+                  "https://www.youtube.com/embed/" +
+                  res.data.videos.results[0].key
+              });
+            }
+            if (Object.keys(res.data.videos.results).length === 0) {
+              watchlistArray.push({
+                img: "https://image.tmdb.org/t/p/w500" + res.data.poster_path,
+                title: res.data.original_name,
+                added: true,
+                trailerLink: "https://www.youtube.com/embed/OCWj5xgu5Ng"
+              });
+            }
             commit("setWatchlist", watchlistArray);
           })
           .catch(error => {
