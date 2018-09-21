@@ -23,6 +23,7 @@ export default {
       this.searchQuery = "";
       this.$store.commit("resetFirstLoadSearchMovie");
       this.$store.commit("resetCurrentPageSearchMovies");
+      this.$store.commit("resetSearchedMovies");
     }
   }
 };

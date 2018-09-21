@@ -374,6 +374,9 @@ const createStore = () => {
       resetCurrentPageSearchMovies: state => {
         state.currentPageSearchMovies = 2;
       },
+      resetSearchedMovies: state => {
+        state.searchedMovies = null;
+      },
       setCurrentPageSearchMovies: state => {
         state.currentPageSearchMovies++;
       },
