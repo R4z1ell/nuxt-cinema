@@ -30,7 +30,9 @@ const createStore = () => {
       firstLoadThriller: true,
       firstLoadWar: true,
       firstLoadWestern: true,
+      firstLoadSearchMovie: true,
       movies: null,
+      searchedMovies: null,
       watchlist: [],
       backdrops: [],
       fullMovie: [],
@@ -83,7 +85,8 @@ const createStore = () => {
       currentPageTvMovie: 2,
       currentPageThriller: 2,
       currentPageWar: 2,
-      currentPageWestern: 2
+      currentPageWestern: 2,
+      currentPageSearchMovies: 2
     },
     getters: {
       viewState(state) {
@@ -108,6 +111,9 @@ const createStore = () => {
       },
       pushMovies(state, movies) {
         state.movies = state.movies.concat(movies);
+      },
+      pushSearchMovies(state, movies) {
+        state.searchedMovies = state.searchedMovies.concat(movies);
       },
       pushTopRated(state, movies) {
         state.topRated = state.topRated.concat(movies);
@@ -196,6 +202,9 @@ const createStore = () => {
       getFullMovieInfo(state, movieInfo) {
         state.fullMovie.push(movieInfo);
       },
+      getSearchedMovies(state, movies) {
+        state.searchedMovies = movies;
+      },
       getTopRated(state, movies) {
         state.topRated = movies;
       },
@@ -219,9 +228,6 @@ const createStore = () => {
       },
       getCrime(state, movies) {
         state.crime = movies;
-      },
-      getDocumentary(state, movies) {
-        state.documentary = movies;
       },
       getDrama(state, movies) {
         state.drama = movies;
@@ -358,6 +364,18 @@ const createStore = () => {
       },
       setFirstLoadWestern: state => {
         state.firstLoadWestern = false;
+      },
+      setFirstLoadSearchMovie: state => {
+        state.firstLoadSearchMovie = false;
+      },
+      resetFirstLoadSearchMovie: state => {
+        state.firstLoadSearchMovie = true;
+      },
+      resetCurrentPageSearchMovies: state => {
+        state.currentPageSearchMovies = 2;
+      },
+      setCurrentPageSearchMovies: state => {
+        state.currentPageSearchMovies++;
       },
       setCurrentPagePopular: state => {
         state.currentPagePopular++;

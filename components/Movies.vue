@@ -21,7 +21,11 @@ export default {
   },
   computed: {
     image() {
-      return "https://image.tmdb.org/t/p/w500" + this.movie.poster_path;
+      if (this.movie.poster_path) {
+        return "https://image.tmdb.org/t/p/w500" + this.movie.poster_path;
+      } else {
+        return "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
+      }
     },
     movieLink() {
       return "/movie/" + this.movie.id;
@@ -55,7 +59,7 @@ export default {
     transition: transform 0.3s;
 
     &:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
       cursor: pointer;
     }
   }
