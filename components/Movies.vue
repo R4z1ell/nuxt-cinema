@@ -57,6 +57,7 @@ export default {
     height: 490.5px;
     width: 327px;
     transition: transform 0.3s;
+    border: solid 1px $color-blue;
 
     &:hover {
       transform: scale(1.02);

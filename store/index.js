@@ -33,6 +33,7 @@ const createStore = () => {
       firstLoadSearchMovie: true,
       movies: null,
       searchedMovies: null,
+      actorMovies: null,
       watchlist: [],
       backdrops: [],
       fullMovie: [],
@@ -205,6 +206,9 @@ const createStore = () => {
       getSearchedMovies(state, movies) {
         state.searchedMovies = movies;
       },
+      getActorMovies(state, movies) {
+        state.actorMovies = movies;
+      },
       getTopRated(state, movies) {
         state.topRated = movies;
       },
@@ -376,6 +380,9 @@ const createStore = () => {
       },
       resetSearchedMovies: state => {
         state.searchedMovies = null;
+      },
+      resetActorMovies: state => {
+        state.actorMovies = null;
       },
       setCurrentPageSearchMovies: state => {
         state.currentPageSearchMovies++;

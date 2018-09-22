@@ -10,12 +10,12 @@
         </div>
         <p class="view__genre">
           {{ this.movie.genre_ids[0] | genre }} {{ checkIfTwoGenres }} {{ this.movie.genre_ids[1] | genre }} 
-          &nbsp; &#8901; &nbsp; {{ checkReleaseDate }} &nbsp; &#8901; &nbsp;
-          {{ checkRuntime | runtime }}
+          &nbsp; &#8901; &nbsp; {{ checkReleaseDate }} 
         </p>
         <div class="view__stars">
           <circle-bar style="margin-left: 27px" :rating="voteAverage"></circle-bar>
           <star-rating  
+            style="margin-bottom: 7px"
             class="stars" 
             :increment="0.5" 
             :star-size="25" 
@@ -89,17 +89,17 @@ export default {
         return "/ ";
       }
     },
-    checkRuntime() {
-      const id = this.movie.id;
-      const result = this.$store.state.infoMovie.filter(movie => {
-        return movie.id === id;
-      });
-      if (result.length > 0) {
-        return result[0].runtime;
-      } else {
-        return "";
-      }
-    },
+    // checkRuntime() {
+    //   const id = this.movie.id;
+    //   const result = this.$store.state.infoMovie.filter(movie => {
+    //     return movie.id === id;
+    //   });
+    //   if (result.length > 0) {
+    //     return result[0].runtime;
+    //   } else {
+    //     return "";
+    //   }
+    // },
     checkTitle() {
       if (this.movie.title) {
         return this.movie.title;
@@ -268,17 +268,58 @@ export default {
   methods: {
     showTrailer() {
       const id = this.movie.id;
-      const result = this.$store.state.infoMovie.filter(movie => {
-        return movie.id === id;
-      });
-      if (Object.keys(result).length === 0) {
-        this.$modal.show("youtube-trailer-detail", {
-          youtubeId: "OCWj5xgu5Ng"
-        });
+      if (
+        this.$route.path === "/tv-shows/popular" ||
+        this.$route.path === "/tv-shows/top-rated" ||
+        this.$route.path === "/tv-shows/on-air"
+      ) {
+        axios
+          .get(
+            "tv/" +
+              id +
+              "?api_key=" +
+              process.env.apiKey +
+              "&language=en-US&append_to_response=videos"
+          )
+          .then(res => {
+            if (Object.keys(res.data.videos.results).length !== 0) {
+              this.$modal.show("youtube-trailer-detail", {
+                youtubeId: res.data.videos.results[0].key
+              });
+            }
+            if (Object.keys(res.data.videos.results).length === 0) {
+              this.$modal.show("youtube-trailer-detail", {
+                youtubeId: "OCWj5xgu5Ng"
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       } else {
-        this.$modal.show("youtube-trailer-detail", {
-          youtubeId: result[0].trailerId
-        });
+        axios
+          .get(
+            "movie/" +
+              id +
+              "?api_key=" +
+              process.env.apiKey +
+              "&append_to_response=videos"
+          )
+          .then(res => {
+            if (Object.keys(res.data.videos.results).length !== 0) {
+              this.$modal.show("youtube-trailer-detail", {
+                youtubeId: res.data.videos.results[0].key
+              });
+            }
+            if (Object.keys(res.data.videos.results).length === 0) {
+              this.$modal.show("youtube-trailer-detail", {
+                youtubeId: "OCWj5xgu5Ng"
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     },
     checkWatchlist(movieTitle) {

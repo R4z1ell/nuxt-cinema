@@ -14,14 +14,40 @@
 import Movies from "@/components/Movies";
 import DetailedView from "@/components/DetailedView";
 import axios from "~/plugins/axios";
-import _ from "lodash";
 
 export default {
   components: {
     Movies,
     DetailedView
   },
+  computed: {
+    movies() {
+      return this.$store.state.searchedMovies;
+    },
+    view() {
+      return this.$store.getters.viewState;
+    },
+    isActive() {
+      return this.$store.state.isActive;
+    }
+  },
   methods: {
+    // ! Adding a message when 'res.data.results' is empty
+    // ! Try to fix the button style when there are less than 20 elements in the 'res.data.results'
+    // ! Try to fix button style in the 'detailedView' Page for 'searchedMovies'
+    // ! Hide the button when in the 'searchedMovies' there are less than 20 movies
+    async nextPage() {
+      let resMovie = await axios.get(
+        "search/movie?api_key=" +
+          process.env.apiKey +
+          "&language=en-US&query=" +
+          this.$route.params.query +
+          "&page=" +
+          this.$store.state.currentPageSearchMovies
+      );
+      this.$store.commit("pushSearchMovies", resMovie.data.results);
+      this.$store.commit("setCurrentPageSearchMovies");
+    },
     searchMovie() {
       axios
         .get(
@@ -34,81 +60,9 @@ export default {
         .then(res => {
           if (this.$store.state.searchedMovies === null) {
             this.$store.commit("getSearchedMovies", [...res.data.results]);
-          }
-          if (this.$store.state.firstLoadSearchMovie) {
-            for (const key in this.$store.state.searchedMovies) {
-              axios
-                .get(
-                  "movie/" +
-                    this.$store.state.searchedMovies[key].id +
-                    "?api_key=" +
-                    process.env.apiKey +
-                    "&append_to_response=videos"
-                )
-                .then(res => {
-                  const infoArray = [];
-                  infoArray.push({
-                    id: res.data.id,
-                    runtime: res.data.runtime,
-                    trailerId: res.data.videos.results[0].key
-                  });
-                  this.$store.commit("setInfoMovie", infoArray);
-                  this.$store.commit("setFirstLoadSearchMovie");
-                });
-            }
+            this.$store.commit("setFirstLoadSearchMovie");
           }
         });
-    },
-    // ! Adding a message when 'res.data.results' is empty
-    // ! Try to fix the button style when there are less than 20 elements in the 'res.data.results'
-    // ! Apparently async-await doesn't work for this 'nextPage' method
-    nextPage() {
-      axios
-        .get(
-          "search/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&query=" +
-            this.$route.params.query +
-            "&page=" +
-            this.$store.state.currentPageSearchMovies
-        )
-        .then(res => {
-          this.$store.commit("pushSearchMovies", res.data.results);
-          for (const key in res.data.results) {
-            axios
-              .get(
-                "movie/" +
-                  res.data.results[key].id +
-                  "?api_key=" +
-                  process.env.apiKey +
-                  "&append_to_response=videos"
-              )
-              .then(res => {
-                const infoArray = [];
-                infoArray.push({
-                  id: res.data.id,
-                  runtime: res.data.runtime,
-                  trailerId: res.data.videos.results[0].key
-                });
-                this.$store.commit("setInfoMovie", infoArray);
-              });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      this.$store.commit("setCurrentPageSearchMovies");
-    }
-  },
-  computed: {
-    movies() {
-      return this.$store.state.searchedMovies;
-    },
-    view() {
-      return this.$store.getters.viewState;
-    },
-    isActive() {
-      return this.$store.state.isActive;
     }
   },
   created() {

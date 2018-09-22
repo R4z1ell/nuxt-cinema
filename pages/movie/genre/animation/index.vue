@@ -32,68 +32,16 @@ export default {
     }
   },
   methods: {
-    nextPage() {
-      axios
-        .get(
-          "discover/movie?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
-            this.$store.state.currentPageAnimation +
-            "&with_genres=16"
-        )
-        .then(res => {
-          this.$store.commit("pushAnimation", res.data.results);
-          for (const key in res.data.results) {
-            axios
-              .get(
-                "movie/" +
-                  res.data.results[key].id +
-                  "?api_key=" +
-                  process.env.apiKey +
-                  "&append_to_response=videos"
-              )
-              .then(res => {
-                const infoArray = [];
-                infoArray.push({
-                  id: res.data.id,
-                  runtime: res.data.runtime,
-                  trailerId: res.data.videos.results[0].key
-                });
-                this.$store.commit("setInfoMovie", infoArray);
-              });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    async nextPage() {
+      let resMovie = await axios.get(
+        "discover/movie?api_key=" +
+          process.env.apiKey +
+          "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
+          this.$store.state.currentPageAnimation +
+          "&with_genres=16"
+      );
+      this.$store.commit("pushAnimation", resMovie.data.results);
       this.$store.commit("setCurrentPageAnimation");
-    }
-  },
-  mounted() {
-    if (this.$store.state.firstLoadAnimation) {
-      for (const key in this.movies) {
-        axios
-          .get(
-            "movie/" +
-              this.movies[key].id +
-              "?api_key=" +
-              process.env.apiKey +
-              "&append_to_response=videos"
-          )
-          .then(res => {
-            const infoArray = [];
-            infoArray.push({
-              id: res.data.id,
-              runtime: res.data.runtime,
-              trailerId: res.data.videos.results[0].key
-            });
-            this.$store.commit("setInfoMovie", infoArray);
-            this.$store.commit("setFirstLoadAnimation");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
     }
   }
 };

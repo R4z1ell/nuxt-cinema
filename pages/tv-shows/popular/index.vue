@@ -20,43 +20,6 @@ export default {
     Movies,
     DetailedView
   },
-  methods: {
-    nextPage() {
-      axios
-        .get(
-          "tv/popular?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=" +
-            this.$store.state.currentPageTvPopular
-        )
-        .then(res => {
-          this.$store.commit("pushTvPopular", res.data.results);
-          for (const key in res.data.results) {
-            axios
-              .get(
-                "tv/" +
-                  res.data.results[key].id +
-                  "?api_key=" +
-                  process.env.apiKey +
-                  "&append_to_response=videos"
-              )
-              .then(res => {
-                const infoArray = [];
-                infoArray.push({
-                  id: res.data.id,
-                  runtime: res.data.episode_run_time[0],
-                  trailerId: res.data.videos.results[0].key
-                });
-                this.$store.commit("setInfoMovie", infoArray);
-              });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      this.$store.commit("setCurrentPageTvPopular");
-    }
-  },
   computed: {
     movies() {
       return this.$store.state.tvPopular;
@@ -68,31 +31,16 @@ export default {
       return this.$store.state.isActive;
     }
   },
-  mounted() {
-    if (this.$store.state.firstLoadTvPopular) {
-      for (const key in this.movies) {
-        axios
-          .get(
-            "tv/" +
-              this.movies[key].id +
-              "?api_key=" +
-              process.env.apiKey +
-              "&language=en-US&append_to_response=videos"
-          )
-          .then(res => {
-            const infoArray = [];
-            infoArray.push({
-              id: res.data.id,
-              runtime: res.data.episode_run_time[0],
-              trailerId: res.data.videos.results[0].key
-            });
-            this.$store.commit("setInfoMovie", infoArray);
-            this.$store.commit("setFirstLoadTvPopular");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+  methods: {
+    async nextPage() {
+      let resMovie = await axios.get(
+        "tv/popular?api_key=" +
+          process.env.apiKey +
+          "&language=en-US&page=" +
+          this.$store.state.currentPageTvPopular
+      );
+      this.$store.commit("pushTvPopular", resMovie.data.results);
+      this.$store.commit("setCurrentPageTvPopular");
     }
   }
 };

@@ -20,43 +20,6 @@ export default {
     Movies,
     DetailedView
   },
-  methods: {
-    nextPage() {
-      axios
-        .get(
-          "movie/top_rated?api_key=" +
-            process.env.apiKey +
-            "&language=en-US&page=" +
-            this.$store.state.currentPageTopRated
-        )
-        .then(res => {
-          this.$store.commit("pushTopRated", res.data.results);
-          for (const key in res.data.results) {
-            axios
-              .get(
-                "movie/" +
-                  res.data.results[key].id +
-                  "?api_key=" +
-                  process.env.apiKey +
-                  "&append_to_response=videos"
-              )
-              .then(res => {
-                const infoArray = [];
-                infoArray.push({
-                  id: res.data.id,
-                  runtime: res.data.runtime,
-                  trailerId: res.data.videos.results[0].key
-                });
-                this.$store.commit("setInfoMovie", infoArray);
-              });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      this.$store.commit("setCurrentPageTopRated");
-    }
-  },
   computed: {
     movies() {
       return this.$store.state.topRated;
@@ -68,31 +31,16 @@ export default {
       return this.$store.state.isActive;
     }
   },
-  mounted() {
-    if (this.$store.state.firstLoadTopRated) {
-      for (const key in this.movies) {
-        axios
-          .get(
-            "movie/" +
-              this.movies[key].id +
-              "?api_key=" +
-              process.env.apiKey +
-              "&append_to_response=videos"
-          )
-          .then(res => {
-            const infoArray = [];
-            infoArray.push({
-              id: res.data.id,
-              runtime: res.data.runtime,
-              trailerId: res.data.videos.results[0].key
-            });
-            this.$store.commit("setInfoMovie", infoArray);
-            this.$store.commit("setFirstLoadTopRated");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+  methods: {
+    async nextPage() {
+      let resMovie = await axios.get(
+        "movie/top_rated?api_key=" +
+          process.env.apiKey +
+          "&language=en-US&page=" +
+          this.$store.state.currentPageTopRated
+      );
+      this.$store.commit("pushTopRated", resMovie.data.results);
+      this.$store.commit("setCurrentPageTopRated");
     }
   }
 };

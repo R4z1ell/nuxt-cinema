@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  props: ["rating"],
   computed: {
     checkVote() {
       if (this.rating <= 10) return "progress-10";
@@ -37,8 +38,7 @@ export default {
       if ((this.rating = 99)) return "progress-99";
       if ((this.rating = 100)) return "progress-100";
     }
-  },
-  props: ["rating"]
+  }
 };
 </script>
 

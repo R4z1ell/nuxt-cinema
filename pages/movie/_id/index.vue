@@ -36,14 +36,17 @@
           <p class="movie__cast" :style="castStyle" v-if="Object.keys(this.movie[0].credits.cast).length !== 0 ? true : false">
             Cast:
             <span class="movie__cast--char" 
+              @click="pushToSearchActorOne"
               v-if="Object.keys(this.movie[0].credits.cast).length >= 1 ? true : false">
                 &nbsp;&nbsp;{{ this.movie[0].credits.cast[0].name }} {{ checkIfOneCast }}
             </span>
             <span class="movie__cast--char" 
+              @click="pushToSearchActorTwo"
               v-if="Object.keys(this.movie[0].credits.cast).length >= 2 ? true : false">
                 {{ this.movie[0].credits.cast[1].name }} {{ checkIfTwoCast }}
             </span>
             <span class="movie__cast--char" 
+              @click="pushToSearchActorThree"
               v-if="Object.keys(this.movie[0].credits.cast).length >= 3 ? true : false">
                 {{ this.movie[0].credits.cast[2].name }}
             </span>
@@ -85,6 +88,36 @@ export default {
     },
     showImageThree() {
       this.$modal.show("backdrop-image-3");
+    },
+    pushToSearchActorOne() {
+      this.$router.push({
+        path: "/search/actor/" + this.movie[0].credits.cast[0].name,
+        query: { id: this.movie[0].credits.cast[0].id }
+      });
+      this.$store.commit("clearAll");
+      this.$store.commit("resetActorMovies");
+      this.$store.commit("fullView");
+      this.$store.commit("pageFull");
+    },
+    pushToSearchActorTwo() {
+      this.$router.push({
+        path: "/search/actor/" + this.movie[0].credits.cast[1].name,
+        query: { id: this.movie[0].credits.cast[1].id }
+      });
+      this.$store.commit("clearAll");
+      this.$store.commit("resetActorMovies");
+      this.$store.commit("fullView");
+      this.$store.commit("pageFull");
+    },
+    pushToSearchActorThree() {
+      this.$router.push({
+        path: "/search/actor/" + this.movie[0].credits.cast[2].name,
+        query: { id: this.movie[0].credits.cast[2].id }
+      });
+      this.$store.commit("clearAll");
+      this.$store.commit("resetActorMovies");
+      this.$store.commit("fullView");
+      this.$store.commit("pageFull");
     }
   },
   computed: {
@@ -140,7 +173,7 @@ export default {
       return "margin: 0 35px 0 150px";
     },
     checkIfTrailer() {
-      if (this.movie[0].videos.results.length > 0) {
+      if (Object.keys(this.movie[0].videos.results).length !== 0) {
         return this.movie[0].videos.results[0].key;
       } else {
         return "OCWj5xgu5Ng";
@@ -450,6 +483,12 @@ export default {
       font-size: 20px;
       color: $color-blue;
       margin-right: 5px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: lighten($color-blue, 15%);
+        cursor: pointer;
+      }
     }
   }
 
