@@ -89,17 +89,6 @@ export default {
         return "/ ";
       }
     },
-    // checkRuntime() {
-    //   const id = this.movie.id;
-    //   const result = this.$store.state.infoMovie.filter(movie => {
-    //     return movie.id === id;
-    //   });
-    //   if (result.length > 0) {
-    //     return result[0].runtime;
-    //   } else {
-    //     return "";
-    //   }
-    // },
     checkTitle() {
       if (this.movie.title) {
         return this.movie.title;
@@ -332,7 +321,6 @@ export default {
         let movieIndex = this.watchlist.findIndex(
           movie => movie.title === this.movie.title
         );
-        //console.log(value);
         this.$store.dispatch("removeFromWatchlist", movieIndex);
       } else {
         if (

@@ -32,7 +32,6 @@ export default {
       return this.$store.state.isActive;
     }
   },
-  // ! Add async-await for all the 'nextPage' methods of the other pages
   methods: {
     async nextPage() {
       let resMovie = await axios.get(
@@ -54,7 +53,7 @@ export default {
 
 .next-page {
   text-align: center;
-  width: 95vw;
+  grid-column: 1 / -1;
   margin-top: -20px;
   margin-bottom: 15px;
 
@@ -117,11 +116,6 @@ export default {
   padding: 40px;
   height: 100vh;
   transform: translateY(19.6%);
-}
-
-.page-detail .main:nth-child(n + 1):nth-last-child(-n + 1),
-.page-detail .main:nth-child(n + 1):nth-last-child(-n + 1) ~ .main {
-  margin-bottom: 20px;
 }
 </style>
 

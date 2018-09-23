@@ -38,7 +38,14 @@ export default {
               "&language=en-US"
           )
           .then(res => {
-            this.$store.commit("getActorMovies", res.data.cast);
+            const resArray = res.data.cast;
+            const filteredArray = resArray.filter(
+              movie => typeof movie.poster_path === "string"
+            );
+            const deepFilteredArray = filteredArray.filter(
+              movie => movie.genre_ids.length !== 0
+            );
+            this.$store.commit("getActorMovies", deepFilteredArray);
           });
       }
     }
@@ -53,6 +60,11 @@ export default {
 .page-full .movies:nth-child(5n + 1):nth-last-child(-n + 5),
 .page-full .movies:nth-child(5n + 1):nth-last-child(-n + 5) ~ .movies {
   margin-bottom: 30px;
+}
+
+.page-detail .main:nth-child(n + 1):nth-last-child(-n + 1),
+.page-detail .main:nth-child(n + 1):nth-last-child(-n + 1) ~ .main {
+  margin-bottom: 20px;
 }
 </style>
 
