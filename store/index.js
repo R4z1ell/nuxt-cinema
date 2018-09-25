@@ -107,6 +107,9 @@ const createStore = () => {
       }
     },
     mutations: {
+      addNewReview(state, review) {
+        state.fullMovie[0].reviews.results.unshift(review);
+      },
       setMovies(state, movies) {
         state.movies = movies;
       },

@@ -59,10 +59,10 @@
         <div class="movie__textarea-container">
           <span class="movie__textarea--comment">Leave a Comment</span>
           <div class="movie__textarea--wrapper">
-            <textarea class="movie__textarea" spellcheck="false"></textarea>
-            <button class="movie__btn-submit" :style="checkIfReview">Submit</button>
+            <textarea class="movie__textarea" spellcheck="false" ref="review"></textarea>
+            <button class="movie__btn-submit" :style="checkIfReview" @click.prevent="submitReview">Submit</button>
           </div>
-        </div> 
+        </div>
         <Comment v-for="(comment, index) in this.movie[0].reviews.results" :key="index" :comment="comment" />
       </div>
     </div>
@@ -77,6 +77,15 @@ import Comment from "@/components/Comment";
 
 export default {
   methods: {
+    submitReview() {
+      if (this.$refs.review.value !== "") {
+        this.$store.commit("addNewReview", {
+          author: "guest",
+          content: this.$refs.review.value
+        });
+        this.$refs.review.value = "";
+      }
+    },
     showTrailer() {
       this.$modal.show("youtube-trailer");
     },
@@ -173,7 +182,7 @@ export default {
       return "margin: 0 35px 0 150px";
     },
     checkIfTrailer() {
-      if (Object.keys(this.movie[0].videos.results).length !== 0) {
+      if (this.movie[0].videos.results.length !== 0) {
         return this.movie[0].videos.results[0].key;
       } else {
         return "OCWj5xgu5Ng";
