@@ -23,7 +23,7 @@
             active-color="#FF6500"
             :rounded-corners="true"
           ></star-rating>
-          <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote count</p>
+          <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote</p>
         </div>
         <p class="view__plot">{{ this.movie.overview.substring(0, 790) }}
           <span v-if="!readMore">{{ this.movie.overview.substring(790,this.movie.overview.length) }}</span>
@@ -462,7 +462,8 @@ export default {
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 1100px;
+  //width: 1100px;
+  width: 60%;
 }
 
 .main {

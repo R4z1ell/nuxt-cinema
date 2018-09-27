@@ -84,29 +84,47 @@ export default {
 
 .page-full {
   display: grid;
-  grid-template-columns: repeat(5, 332.5px);
+  //grid-template-columns: repeat(5, 332.5px);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 40px;
   padding: 40px;
   height: 100vh;
   transform: translateY(19.6%);
 
   @media (max-width: 1500px) {
-    grid-template-columns: repeat(5, 1fr);
     grid-gap: 35px;
   }
 
-  @media (max-width: 1387px) {
+  @media (max-width: 1400px) {
+    grid-gap: 30px;
+  }
+
+  @media (max-width: 1250px) {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
   }
 
-  @media (max-width: 1135px) {
-    grid-gap: 25px;
+  @media (max-width: 870px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
   }
 
-  @media (max-width: 1066px) {
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 40px;
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+  }
+
+  @media (max-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+
+  @media (max-width: 400px) {
+    grid-gap: 10px;
+  }
+
+  @media (max-width: 370px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
