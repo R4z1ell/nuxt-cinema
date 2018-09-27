@@ -1,14 +1,50 @@
 <template>
   <div class="movie__comment">
     <p class="movie__comment--author">{{ comment.author }}</p>
-    <p class="movie__comment--content">{{ comment.content }}</p>
+    <p class="movie__comment--content">{{ comment.content.substring(0, 2500) }}
+      <span v-if="!readMore">{{ comment.content.substring(2500, comment.content.length) }}</span>
+      <span v-if="this.checkOverviewLength">{{ checkDot }}</span>
+      <span v-if="this.checkOverviewLength" class="read-more" @click="readMore = !readMore">
+        {{ this.readMoreOrLess }}
+        <label v-if="readMore">&#187;</label>
+        <label v-if="!readMore">&#171;</label>
+      </span>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      readMore: true
+    };
+  },
   props: {
     comment: Object
+  },
+  computed: {
+    readMoreOrLess() {
+      if (this.readMore === false) {
+        return "  read less";
+      } else {
+        return "  read more";
+      }
+    },
+    checkDot() {
+      if (this.readMore === false) {
+        return "";
+      } else {
+        return " ...";
+      }
+    },
+    checkOverviewLength() {
+      if (this.comment.content.length > 2500) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 };
 </script>
@@ -32,7 +68,8 @@ export default {
   }
 
   &--content {
-    font-size: 17px;
+    font-size: 18px;
+    opacity: 0.85;
     margin: 0 0 10px 10px;
     padding: 7px;
   }

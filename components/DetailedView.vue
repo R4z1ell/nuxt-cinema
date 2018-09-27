@@ -25,7 +25,15 @@
           ></star-rating>
           <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote count</p>
         </div>
-        <p class="view__plot">{{ movie.overview }}</p>
+        <p class="view__plot">{{ this.movie.overview.substring(0, 790) }}
+          <span v-if="!readMore">{{ this.movie.overview.substring(790,this.movie.overview.length) }}</span>
+          <span v-if="this.checkOverviewLength">{{ checkDot }}</span>
+          <span v-if="this.checkOverviewLength" class="read-more" @click="readMore = !readMore">
+            {{ this.readMoreOrLess }}
+            <label v-if="readMore">&#187;</label>
+            <label v-if="!readMore">&#171;</label>
+          </span>
+        </p>
         <button-trailer style="margin: 23px 0 0 25px" @click="showTrailer">Watch Trailer</button-trailer>
       </div>
       <div class="view__btn">
@@ -51,6 +59,11 @@ import CircleBar from "@/components/UI/Buttons/CircleBar";
 import StarRating from "vue-star-rating";
 
 export default {
+  data() {
+    return {
+      readMore: true
+    };
+  },
   props: {
     movie: {
       type: Object,
@@ -76,6 +89,27 @@ export default {
     },
     movieLink() {
       return "/movie/" + this.movie.id;
+    },
+    readMoreOrLess() {
+      if (this.readMore === false) {
+        return "  read less";
+      } else {
+        return "  read more";
+      }
+    },
+    checkDot() {
+      if (this.readMore === false) {
+        return "";
+      } else {
+        return " ...";
+      }
+    },
+    checkOverviewLength() {
+      if (this.movie.overview.length > 780) {
+        return true;
+      } else {
+        return false;
+      }
     },
     checkReleaseDate() {
       if (this.movie.release_date) {
@@ -340,6 +374,17 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/variables";
+
+.read-more {
+  text-decoration: underline;
+  font-style: italic;
+  transition: color 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    color: $color-secondary;
+  }
+}
 
 .detail-title {
   display: flex;
