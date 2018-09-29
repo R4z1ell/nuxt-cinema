@@ -17,15 +17,13 @@
           class="notification-detail__trailer" 
           @click="$modal.show('youtube-notification', {trailer: movie.trailerLink})">
           Watch Trailer
-        </button-trailer>
-        <button-ticket class="notification-detail__tickets">Buy Tickets</button-ticket>     
+        </button-trailer>  
       </div>
     </div>
   </div>  
 </template>
 
 <script>
-import ButtonTicket from "@/components/UI/Buttons/ButtonTicket";
 import ButtonTrailer from "@/components/UI/Buttons/ButtonTrailer";
 
 export default {
@@ -43,7 +41,6 @@ export default {
     }
   },
   components: {
-    ButtonTicket,
     ButtonTrailer
   }
 };

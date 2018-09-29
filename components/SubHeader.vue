@@ -36,7 +36,9 @@
       </p>
     </div>
 
-    <img :style="logoStyle" class="sub-header__logo" src="https://www.themoviedb.org/assets/1/v4/logos/powered-by-rectangle-green-dcada16968ed648d5eb3b36bbcfdd8cdf804f723dcca775c8f2bf4cea025aad6.svg" alt="logo">
+    <!-- <img :style="logoStyle" class="sub-header__logo" src="https://www.themoviedb.org/assets/1/v4/logos/powered-by-rectangle-green-dcada16968ed648d5eb3b36bbcfdd8cdf804f723dcca775c8f2bf4cea025aad6.svg" alt="logo"> -->
+    <img class="sub-header__logo-1" src="https://www.themoviedb.org/assets/1/v4/logos/powered-by-rectangle-green-dcada16968ed648d5eb3b36bbcfdd8cdf804f723dcca775c8f2bf4cea025aad6.svg" alt="logo">
+    <img class="sub-header__logo-2" src="https://www.themoviedb.org/assets/1/v4/logos/stacked-green-cae7a95e2590dbdde28284ac26245cb2792788838f5c498b892e8d01c183e6f3.svg" alt="logo">
     
     <div class="divider" v-if="hideButtons">
       <div class="sub-header__view" @click="detailed">
@@ -79,13 +81,13 @@ export default {
     TvShowsDetail
   },
   computed: {
-    logoStyle() {
-      if (this.$route.path === "/movie/" + this.$route.params.id) {
-        return "margin-right: 45.9%";
-      } else {
-        return "margin-right: 16.4%";
-      }
-    },
+    // logoStyle() {
+    //   if (this.$route.path === "/movie/" + this.$route.params.id) {
+    //     return "margin-right: 45.9%";
+    //   } else {
+    //     return "margin-right: 16.4%";
+    //   }
+    // },
     hideButtons() {
       if (this.$route.path !== "/movie/" + this.$route.params.id) {
         return true;
@@ -146,10 +148,85 @@ export default {
   background-color: $color-primary-light;
   z-index: 15;
 
-  &__logo {
+  &__logo-1 {
     width: 150px;
     height: 50px;
-    margin-right: 14.5%;
+    //margin-right: 14.5%;
+    position: absolute;
+    left: 46%;
+
+    @media (max-width: 1780px) {
+      left: 45.7%;
+    }
+
+    @media (max-width: 1628px) {
+      left: 45.6%;
+    }
+
+    @media (max-width: 1568px) {
+      left: 45.3%;
+    }
+
+    @media (max-width: 1462px) {
+      left: 44.8%;
+    }
+
+    @media (max-width: 1350px) {
+      left: 44.4%;
+    }
+
+    @media (max-width: 1234px) {
+      left: 44%;
+    }
+
+    @media (max-width: 1166px) {
+      left: 42.7%;
+    }
+
+    @media (max-width: 1071px) {
+      left: 42.5%;
+    }
+
+    @media (max-width: 1020px) {
+      display: none;
+    }
+  }
+
+  &__logo-2 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 47.6%;
+
+    @media (min-width: 1021px) {
+      display: none;
+    }
+
+    @media (max-width: 750px) {
+      left: 47%;
+    }
+
+    @media (max-width: 679px) {
+      left: 46.5%;
+    }
+
+    @media (max-width: 580px) {
+      left: 45.7%;
+    }
+
+    @media (max-width: 495px) {
+      left: 8%;
+      width: 35px;
+      height: 35px;
+    }
+
+    @media (max-width: 405px) {
+      left: 9.7%;
+    }
+
+    @media (max-width: 340px) {
+      left: 11.8%;
+    }
   }
 
   &__release,
@@ -158,15 +235,35 @@ export default {
     font-size: 20px;
     color: $color-white;
     cursor: pointer;
+
+    @media (max-width: 1050px) {
+      font-size: 18px;
+    }
+
+    @media (max-width: 869px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 780px) {
+      display: none;
+    }
   }
 
   &__release {
     margin-left: 40px;
     margin-right: 40px;
+
+    @media (max-width: 900px) {
+      margin-right: 25px;
+    }
   }
 
   &__tv {
     margin-right: 40px;
+
+    @media (max-width: 900px) {
+      margin-right: 25px;
+    }
   }
 
   &__icon {

@@ -2,7 +2,7 @@
   <div class="main"> 
     <div class="view" :style="[checkIfLastComponent ? {'margin': '25px 0 10px 0'} : {'margin': '25px 0 40px 0'}]">
       <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
-        <img :src="image" alt="movie-image" class="view__image">
+        <img :src="image" alt="movie-image" class="view__image-1">
       </nuxt-link>
       <div class="wrapper">
         <div class="detail-title">
@@ -25,6 +25,13 @@
           ></star-rating>
           <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote</p>
         </div>
+        <img :src="image" alt="movie-image" class="view__image-2">
+        <div class="view__btn">
+          <button-trailer @click="showTrailer">Watch Trailer</button-trailer>
+          <button-watchlist @click="onAgree" class="view__btn--list">
+            {{ checkWatchlist(this.movie.title) ? "Remove from Watchlist" : "Add to Watchlist" }}
+          </button-watchlist>
+        </div>
         <p class="view__plot">{{ this.movie.overview.substring(0, 790) }}
           <span v-if="!readMore">{{ this.movie.overview.substring(790,this.movie.overview.length) }}</span>
           <span v-if="this.checkOverviewLength">{{ checkDot }}</span>
@@ -33,17 +40,6 @@
             <label v-if="readMore">&#187;</label>
             <label v-if="!readMore">&#171;</label>
           </span>
-        </p>
-        <button-trailer style="margin: 23px 0 0 25px" @click="showTrailer">Watch Trailer</button-trailer>
-      </div>
-      <div class="view__btn">
-        <button-ticket>Buy Ticket</button-ticket>
-        <p 
-          class="view__btn--list" 
-          @click="onAgree"
-          :style="[checkWatchlist(this.movie.title) ? {'margin': '30px 0 0 10px'} : {'margin': '30px 0 0 40px'}]"
-        >
-          {{ checkWatchlist(this.movie.title) ? "Remove from Watchlist" : "Add to Watchlist" }}
         </p>
       </div>
     </div>
@@ -54,7 +50,7 @@
 <script>
 import axios from "~/plugins/axios";
 import ButtonTrailer from "@/components/UI/Buttons/ButtonTrailer";
-import ButtonTicket from "@/components/UI/Buttons/ButtonTicket";
+import ButtonWatchlist from "@/components/UI/Buttons/ButtonWatchlist";
 import CircleBar from "@/components/UI/Buttons/CircleBar";
 import StarRating from "vue-star-rating";
 
@@ -72,7 +68,7 @@ export default {
   },
   components: {
     ButtonTrailer,
-    ButtonTicket,
+    ButtonWatchlist,
     StarRating,
     CircleBar
   },
@@ -389,6 +385,18 @@ export default {
 .detail-title {
   display: flex;
   height: 50px;
+
+  @media (max-width: 1370px) {
+    height: 50px;
+  }
+
+  @media (max-width: 800px) {
+    height: 44px;
+  }
+
+  @media (max-width: 500px) {
+    height: 35px;
+  }
 }
 
 .view {
@@ -398,6 +406,11 @@ export default {
 
   &__stars {
     display: flex;
+    margin-left: 0;
+
+    @media (max-width: 1370px) {
+      margin: 0px 0 15px 0;
+    }
 
     &--count {
       margin: 18px 0 0 15px;
@@ -408,15 +421,105 @@ export default {
   }
 
   &__btn {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     right: 5%;
-    top: 34%;
+    top: 30%;
+
+    @media (max-width: 1370px) {
+      position: static;
+      display: block;
+      top: 41%;
+      right: 23%;
+    }
+
+    @media (max-width: 1350px) {
+      right: 22%;
+    }
+
+    @media (max-width: 1330px) {
+      right: 21.5%;
+    }
+
+    @media (max-width: 1300px) {
+      right: 21%;
+    }
+
+    @media (max-width: 1250px) {
+      right: 19.5%;
+    }
+
+    @media (max-width: 1230px) {
+      right: 19%;
+    }
+
+    @media (max-width: 1200px) {
+      right: 18.5%;
+    }
+
+    @media (max-width: 1172px) {
+      right: 16.5%;
+    }
+
+    @media (max-width: 1150px) {
+      right: 16%;
+    }
+
+    @media (max-width: 1100px) {
+      right: 15%;
+    }
+
+    @media (max-width: 1070px) {
+      right: 14%;
+    }
+
+    @media (max-width: 1030px) {
+      right: 12.5%;
+    }
+
+    @media (max-width: 1000px) {
+      right: 13.5%;
+    }
+
+    @media (max-width: 950px) {
+      right: 11.5%;
+    }
+
+    @media (max-width: 920px) {
+      right: 9.5%;
+    }
+
+    @media (max-width: 850px) {
+      right: 7.5%;
+    }
+
+    @media (max-width: 815px) {
+      right: 5.5%;
+    }
+
+    @media (max-width: 800px) {
+      margin-top: 29px;
+    }
+
+    @media (max-width: 500px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     &--list {
       color: $color-white;
       font-size: 20px;
-      margin: 30px 0 0 40px;
+      margin-top: 15px;
+      border-radius: 10px;
+      text-align: center;
       cursor: pointer;
+
+      @media (max-width: 1370px) {
+        margin-top: 0;
+        margin-left: 15px;
+      }
 
       &:hover {
         color: $color-secondary;
@@ -425,9 +528,27 @@ export default {
     }
   }
 
-  &__image {
+  &__image-1 {
     width: 225px;
     height: 338px;
+
+    @media (max-width: 1094px) {
+      width: 203px;
+      height: 304.5px;
+    }
+
+    @media (max-width: 799px) {
+      display: none;
+    }
+  }
+
+  &__image-2 {
+    width: 155px;
+    height: 232.5px;
+
+    @media (min-width: 800px) {
+      display: none;
+    }
   }
 
   &__split {
@@ -442,6 +563,35 @@ export default {
     font-size: 36px;
     color: $color-white;
     margin: 0 0 0 25px;
+
+    @media (max-width: 1050px) {
+      font-size: 30px;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 25px;
+    }
+
+    @media (max-width: 799px) {
+      font-size: 30px;
+      margin: 0 0 0 0;
+    }
+
+    @media (max-width: 720px) {
+      font-size: 28px;
+    }
+
+    @media (max-width: 680px) {
+      font-size: 25px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 21px;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 19px;
+    }
   }
 
   &__genre {
@@ -449,6 +599,14 @@ export default {
     opacity: 0.8;
     margin: 3px 0 0 25px;
     font-size: 15px;
+
+    @media (max-width: 1370px) {
+      margin: 0px 0 0 25px;
+    }
+
+    @media (max-width: 799px) {
+      margin: 0 0 0 0;
+    }
   }
 
   &__plot {
@@ -456,14 +614,37 @@ export default {
     opacity: 0.8;
     font-size: 18px;
     margin-left: 25px;
+    margin-top: 0;
+
+    @media (max-width: 1370px) {
+      margin-left: 66px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 1070px) {
+      font-size: 17px;
+    }
+
+    @media (max-width: 800px) {
+      margin-top: 26px;
+      margin-left: 20px;
+    }
   }
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
-  //width: 1100px;
-  width: 60%;
+  width: 55%;
+
+  @media (max-width: 1370px) {
+    width: 80%;
+    align-items: center;
+  }
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 }
 
 .main {

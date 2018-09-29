@@ -31,7 +31,7 @@
         <div class="movie__cast-container">
           <div class="movie__btn-container">
             <button-trailer class="movie__btn-trailer" @click="showTrailer" :style="checkIfComment">Watch Trailer</button-trailer>
-            <button-ticket class="movie__btn-ticket" :style="checkIfComment">Buy Ticket</button-ticket>
+            <!-- <button-ticket class="movie__btn-ticket" :style="checkIfComment">Buy Ticket</button-ticket> -->
           </div>
           <p class="movie__cast" :style="castStyle" v-if="Object.keys(this.movie[0].credits.cast).length !== 0 ? true : false">
             Cast:
@@ -72,10 +72,15 @@
 <script>
 import axios from "~/plugins/axios";
 import ButtonTrailer from "@/components/UI/Buttons/ButtonTrailer";
-import ButtonTicket from "@/components/UI/Buttons/ButtonTicket";
+//import ButtonTicket from "@/components/UI/Buttons/ButtonTicket";
 import Comment from "@/components/Comment";
 
 export default {
+  components: {
+    ButtonTrailer,
+    //ButtonTicket,
+    Comment
+  },
   methods: {
     submitReview() {
       if (this.$refs.review.value !== "") {
@@ -244,11 +249,6 @@ export default {
         return "https://d32qys9a6wm9no.cloudfront.net/images/movies/poster/500x735.png";
       }
     }
-  },
-  components: {
-    ButtonTrailer,
-    ButtonTicket,
-    Comment
   },
   asyncData({ store, params, query }) {
     if (

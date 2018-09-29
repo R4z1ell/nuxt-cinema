@@ -42,10 +42,18 @@ export default {
   @extend .btn;
   background-color: $color-blue;
 
+  @media (max-width: 500px) {
+    margin-bottom: 10px;
+  }
+
   &__icon {
     position: absolute;
     left: 8%;
     top: 23%;
+
+    @media (max-width: 900px) {
+      top: 17%;
+    }
   }
 }
 </style>

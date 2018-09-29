@@ -10,6 +10,18 @@
   outline: none;
   cursor: pointer;
   border: none;
+
+  @media (max-width: 1000px) {
+    width: 195px;
+    height: 57px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 900px) {
+    width: 175px;
+    height: 52px;
+    font-size: 16px;
+  }
 }
 
 .btn {
