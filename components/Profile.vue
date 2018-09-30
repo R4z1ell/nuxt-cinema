@@ -19,6 +19,10 @@ export default {};
     height: 65px;
     border-radius: 50%;
     overflow: hidden;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__image {

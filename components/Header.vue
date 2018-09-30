@@ -113,6 +113,10 @@ export default {
     align-items: center;
     height: 130px;
     background-color: $color-primary;
+
+    @media (max-width: 1024px) {
+      height: 76px;
+    }
   }
 
   &__icon {
@@ -121,6 +125,10 @@ export default {
     right: 50%;
     width: 25px;
     height: 25px;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__logo {
@@ -137,12 +145,20 @@ export default {
     position: absolute;
     top: 5%;
     left: 45.9%;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__wrapper {
     display: flex;
     align-items: center;
     margin-right: 43px;
+
+    @media (max-width: 1024px) {
+      margin-right: 5px;
+    }
   }
 }
 

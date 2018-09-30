@@ -96,6 +96,22 @@ export default {
     border-style: solid;
     border-width: 0 13px 13px 13px;
     border-color: transparent transparent $color-white transparent;
+
+    @media (max-width: 1520px) {
+      right: 13.8%;
+    }
+
+    @media (max-width: 1320px) {
+      right: 12.8%;
+    }
+
+    @media (max-width: 1050px) {
+      right: 17%;
+    }
+
+    @media (max-width: 869px) {
+      right: 21%;
+    }
   }
 
   &__wrapper {

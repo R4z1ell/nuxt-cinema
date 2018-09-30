@@ -1,7 +1,8 @@
 <template>
   <div>
     <Header class="fixed" @sidenavToggle="displaySidenav = true" />
-    <sub-header style="margin-top: 130px" class="fixed" />
+    <sub-header :style="[windowWidth <= 1007 ? {'margin-top' : '76px'} : {'margin-top' : '130px'}]" class="fixed" />
+    <!-- <sub-header style="margin-top: 130px" class="fixed" /> -->
     <transition name="slide-side">
       <Sidenav v-if="displaySidenav" @close="displaySidenav = false"/>
     </transition>
@@ -26,7 +27,8 @@ export default {
       displaySidenav: false,
       displayReleaseDate: false,
       trailerOne: "",
-      trailerTwo: ""
+      trailerTwo: "",
+      windowWidth: 0
     };
   },
   components: {
@@ -35,6 +37,9 @@ export default {
     Sidenav
   },
   methods: {
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
     beforeOpenOne(event) {
       this.trailerOne =
         "https://www.youtube.com/embed/" + event.params.youtubeId;
@@ -42,6 +47,15 @@ export default {
     beforeOpenTwo(event) {
       this.trailerTwo = event.params.trailer;
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.getWindowWidth);
+      this.getWindowWidth();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWindowWidth);
   }
 };
 </script>

@@ -13,7 +13,7 @@
       <img :src="imgThree" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
     <div class="movie">
-      <div class="movie__wrapper">
+      <div class="movie__wrapper-1" v-if="windowWidth <= 1007 ? false : true">
         <h1 class="movie__title" :style="checkTitleLength">
           {{ checkTitle }}
         </h1>
@@ -25,13 +25,21 @@
       </div>
       <span class="movie__divider"></span>
       <div class="movie__content">
+        <div class="movie__wrapper-2" v-if="windowWidth <= 1007 ? true : false">
+          <h1 class="movie__title">
+            {{ checkTitle }}
+          </h1>
+          <h3 class="movie__genre"> 
+            {{ this.movie[0].genres[0].name }} {{ checkIfTwoGenres }} {{ checkIfGenreTwo }} 
+            &nbsp; &#8901; &nbsp; {{ checkRelease }} &nbsp; &#8901; &nbsp; {{ checkRuntime | runtime }}
+          </h3>
+        </div>
         <img :src="imgOne" alt="backdrop-image" class="movie__image" @click="showImageOne">
         <img :src="imgTwo" alt="backdrop-image" class="movie__image" @click="showImageTwo">
         <img :src="imgThree" alt="backdrop-image" class="movie__image" @click="showImageThree">
         <div class="movie__cast-container">
           <div class="movie__btn-container">
             <button-trailer class="movie__btn-trailer" @click="showTrailer" :style="checkIfComment">Watch Trailer</button-trailer>
-            <!-- <button-ticket class="movie__btn-ticket" :style="checkIfComment">Buy Ticket</button-ticket> -->
           </div>
           <p class="movie__cast" :style="castStyle" v-if="Object.keys(this.movie[0].credits.cast).length !== 0 ? true : false">
             Cast:
@@ -72,16 +80,31 @@
 <script>
 import axios from "~/plugins/axios";
 import ButtonTrailer from "@/components/UI/Buttons/ButtonTrailer";
-//import ButtonTicket from "@/components/UI/Buttons/ButtonTicket";
 import Comment from "@/components/Comment";
 
 export default {
+  data() {
+    return {
+      windowWidth: 0
+    };
+  },
   components: {
     ButtonTrailer,
-    //ButtonTicket,
     Comment
   },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.getWindowWidth);
+      this.getWindowWidth();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWindowWidth);
+  },
   methods: {
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
     submitReview() {
       if (this.$refs.review.value !== "") {
         this.$store.commit("addNewReview", {
@@ -184,7 +207,11 @@ export default {
       }
     },
     castStyle() {
-      return "margin: 0 35px 0 150px";
+      if (this.windowWidth <= 1007) {
+        return "margin: 0 15px 0 0";
+      } else {
+        return "margin: 0 35px 0 150px";
+      }
     },
     checkIfTrailer() {
       if (this.movie[0].videos.results.length !== 0) {
@@ -427,6 +454,7 @@ export default {
 };
 </script>
 
+// ! Fix the Notification icon position on the alarm icon
 <style lang="scss">
 @import "../../../assets/scss/variables";
 
@@ -438,11 +466,21 @@ export default {
   position: absolute;
   top: 19.7%;
 
-  &__btn-trailer,
-  &__btn-ticket {
+  @media (max-width: 1024px) {
+    top: 16.7%;
+  }
+
+  &__btn-trailer {
     width: 185px !important;
     height: 51px !important;
     font-size: 17px !important;
+
+    @media (max-width: 1024px) {
+      width: 154px !important;
+      height: 46px !important;
+      font-size: 15px !important;
+      margin-left: 15px;
+    }
   }
 
   &__btn-trailer {
@@ -450,13 +488,10 @@ export default {
     svg {
       width: 27px !important;
       padding-bottom: 7px;
-    }
-  }
 
-  &__btn-ticket {
-    svg {
-      width: 45px !important;
-      padding-bottom: 10px;
+      @media (max-width: 1024px) {
+        padding-bottom: 11px;
+      }
     }
   }
 
@@ -480,6 +515,11 @@ export default {
     justify-content: space-between;
     grid-column: 1 / span 3;
     margin-top: 35px;
+
+    @media (max-width: 1024px) {
+      align-items: center;
+      margin-top: 22px;
+    }
   }
 
   &__cast {
@@ -488,11 +528,19 @@ export default {
     color: $color-white;
     margin: 40px 35px 0 258px;
 
+    @media (max-width: 1024px) {
+      font-size: 19px;
+    }
+
     &--char {
       font-size: 20px;
       color: $color-blue;
       margin-right: 5px;
       transition: color 0.2s;
+
+      @media (max-width: 1024px) {
+        font-size: 19px;
+      }
 
       &:hover {
         color: lighten($color-blue, 15%);
@@ -503,16 +551,24 @@ export default {
 
   &__content {
     background-color: $color-primary;
-    max-width: 1338px;
-    min-width: 1338px;
-    min-height: 870px;
+    max-width: 70.3%;
+    //min-width: 1338px;
+    //min-height: 870px;
+    //transform: translateX(42.2%);
     transform: translateX(42.2%);
     padding-left: 35px;
     padding-top: 35px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    //grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 32.5% 32.5% 32.6%;
     grid-column-gap: 15px;
-    grid-template-rows: auto auto auto 1fr;
+    //grid-template-rows: auto auto auto 1fr;
+
+    @media (max-width: 1024px) {
+      max-width: 100%;
+      transform: translateX(-2%);
+      padding-top: 0px;
+    }
 
     &::-webkit-scrollbar {
       display: none;
@@ -521,6 +577,10 @@ export default {
 
   &__overview-container {
     grid-column: 1 / span 3;
+
+    @media (max-width: 1024px) {
+      margin-left: 15px;
+    }
   }
 
   &__overview {
@@ -532,19 +592,33 @@ export default {
     margin-top: 10px;
     margin-right: 35px;
 
+    @media (max-width: 1024px) {
+      font-size: 17px;
+    }
+
     &--title {
       margin-top: 35px;
       font-size: 25px;
       font-weight: 700;
       color: $color-white;
+
+      @media (max-width: 1024px) {
+        font-size: 22px;
+      }
     }
   }
 
   &__image {
-    width: 381px;
-    height: 214px;
+    //width: 381px;
+    //height: 214px;
+    width: 90%;
+    height: auto;
     border-radius: 10px;
     transition: transform 0.3s;
+
+    @media (max-width: 1024px) {
+      justify-self: center;
+    }
 
     &:hover {
       transform: scale(1.1);
@@ -553,21 +627,34 @@ export default {
   }
 
   &__poster {
-    width: 487px;
-    height: 730px;
+    //width: 487px;
+    width: 89%;
+    height: auto;
+    //height: 730px;
     margin: 26px 0 0 40px;
+
+    @media (max-width: 1024px) {
+      width: 77%;
+    }
   }
 
   &__divider {
     position: absolute;
     top: 19.7%;
     left: 27.5%;
-    margin-left: 40px;
-    height: 858px;
+    left: 29.3%;
+    //margin-left: 40px;
+    transform: translateY(-19.7%);
+    //height: 858px;
+    height: 100%;
     width: 1px;
     background-color: $color-white;
     opacity: 0.15;
-    position: fixed;
+    //position: fixed;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   &__genre {
@@ -576,6 +663,13 @@ export default {
     color: $color-white;
     opacity: 0.8;
     margin-left: 40px;
+
+    @media (max-width: 1024px) {
+      grid-column: 1 / span 3;
+      text-align: center;
+      margin-bottom: 35px;
+      margin-left: 0px;
+    }
   }
 
   &__textarea-container {
@@ -602,11 +696,19 @@ export default {
       font-size: 18px;
       font-weight: 700;
       color: $color-white;
+
+      @media (max-width: 1024px) {
+        margin-left: 15px;
+      }
     }
 
     &--wrapper {
       position: relative;
       margin: 10px 35px 0 0;
+
+      @media (max-width: 1024px) {
+        margin: 12px 15px 0 15px;
+      }
     }
   }
 
@@ -616,14 +718,29 @@ export default {
     padding-top: 20px;
     margin: 0px 0 5px 40px;
     width: 500px;
+
+    @media (max-width: 1024px) {
+      grid-column: 2;
+      padding-top: 35px;
+      margin: 0 0 8px 0;
+      text-align: center;
+      width: 100%;
+    }
   }
 
-  &__wrapper {
+  &__wrapper-1 {
+    width: 29.7%;
     position: fixed;
     background-color: $color-primary;
     padding-bottom: 19px;
     padding-right: 25px;
     min-height: 870px;
+  }
+
+  &__wrapper-2 {
+    @media (max-width: 1024px) {
+      grid-column: 1 / -1;
+    }
   }
 }
 </style>

@@ -60,6 +60,11 @@ export default {
   margin-bottom: 20px;
   margin-right: 35px;
 
+  @media (max-width: 1024px) {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+
   &--author {
     color: $color-secondary;
     font-size: 20px;

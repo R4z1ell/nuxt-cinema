@@ -104,6 +104,10 @@ export default {
     grid-gap: 30px;
   }
 
+  @media (max-width: 1024px) {
+    transform: translateY(13.6%);
+  }
+
   @media (max-width: 870px) {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
@@ -134,6 +138,10 @@ export default {
   padding: 40px;
   height: 100vh;
   transform: translateY(19.6%);
+
+  @media (max-width: 1024px) {
+    transform: translateY(13.6%);
+  }
 }
 </style>
 
