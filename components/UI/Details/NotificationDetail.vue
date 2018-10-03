@@ -70,6 +70,10 @@ export default {
     max-height: 650px;
   }
 
+  @media (height: 1024px) and (width: 768px) {
+    top: 91%;
+  }
+
   /* width */
   &::-webkit-scrollbar {
     width: 7px;

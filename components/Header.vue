@@ -95,6 +95,14 @@ export default {
   &__arrow {
     margin-left: 40px;
     margin-right: 10px;
+
+    @media (height: 736px) and (width: 414px) {
+      margin-left: 14px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      margin-left: 12px;
+    }
   }
 
   &__back {
@@ -116,6 +124,11 @@ export default {
 
     @media (max-width: 1024px) {
       height: 76px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      height: 76px;
+      max-width: 360px;
     }
   }
 
@@ -199,6 +212,10 @@ export default {
     @media (max-width: 470px) {
       margin-right: 0px;
     }
+
+    @media (height: 640px) and (width: 360px) {
+      margin-right: -8px;
+    }
   }
 }
 
@@ -207,12 +224,25 @@ export default {
   right: 2.35%;
   top: 86px;
 
+  @media (height: 960px) and (width: 1440px) {
+    right: 3.1%;
+  }
+
+  @media (height: 912px) and (width: 1368px) {
+    right: 3.3%;
+  }
+
   @media (height: 768px) and (width: 1366px) {
     right: 3.3%;
   }
 
   @media (height: 800px) and (width: 1280px) {
     right: 3.6%;
+  }
+
+  @media (height: 1024px) and (width: 768px) {
+    right: 6%;
+    top: 54px;
   }
 }
 </style>

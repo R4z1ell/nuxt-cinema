@@ -1,7 +1,9 @@
 <template>
   <div> 
-    <modal name="youtube-trailer" :width="1050" :height="600">
-      <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="600" width="1050"></iframe>
+    <!-- <modal name="youtube-trailer" :width="1050" :height="600"> -->
+    <modal name="youtube-trailer" width="90%" height="80%">
+      <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="100%" width="100%"></iframe>
+      <!-- <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="600" width="1050"></iframe> -->
     </modal>
     <modal name="backdrop-image-1" :width="780" :height="439">
       <img :src="imgOne" alt="backdrop-image" style="{width: 780px, height: 439px}">
@@ -633,6 +635,13 @@ export default {
       transform: translateX(41.6%);
     }
 
+    @media (height: 960px) and (width: 1440px) {
+      padding-top: 50px;
+      padding-left: 0px;
+      max-width: 67.9%;
+      transform: translateX(46.6%);
+    }
+
     @media (max-width: 1431px) {
       transform: translateX(41.5%);
     }
@@ -641,14 +650,16 @@ export default {
       transform: translateX(41.4%);
     }
 
+    @media (height: 912px) and (width: 1368px) {
+      padding-top: 56px;
+      padding-left: 0px;
+      max-width: 68.3%;
+      transform: translateX(45.6%);
+    }
+
     @media (height: 768px) and (width: 1366px) {
       padding-top: 83px;
       padding-left: 0px;
-    }
-
-    @media (height: 800px) and (width: 1280px) {
-      padding-top: 83px;
-      padding-left: 20px;
     }
 
     @media (max-width: 1345px) {
@@ -657,6 +668,13 @@ export default {
 
     @media (max-width: 1305px) {
       transform: translateX(41.2%);
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      padding-top: 72px;
+      padding-left: 0px;
+      transform: translateX(47.6%);
+      max-width: 67.2%;
     }
 
     @media (max-width: 1268px) {
@@ -717,6 +735,12 @@ export default {
       padding-left: 25px;
     }
 
+    @media (height: 640px) and (width: 360px) {
+      max-width: 340px;
+      padding-left: 0px;
+      transform: translateX(-0.8%);
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -749,6 +773,11 @@ export default {
 
     @media (max-width: 1024px) {
       font-size: 17px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      margin-right: 0px;
+      max-width: 95%;
     }
 
     &--title {
@@ -823,8 +852,16 @@ export default {
     //height: 730px;
     margin: 26px 0 0 40px;
 
+    @media (height: 912px) and (width: 1368px) {
+      width: 85%;
+    }
+
     @media (height: 768px) and (width: 1366px) {
-      width: 79%;
+      width: 76%;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      margin: 17px 0 0 40px;
     }
 
     @media (max-width: 1024px) {
@@ -855,6 +892,18 @@ export default {
     opacity: 0.15;
     //position: fixed;
 
+    @media (height: 912px) and (width: 1368px) {
+      left: 29.1%;
+    }
+
+    @media (height: 768px) and (width: 1366px) {
+      left: 26.5%;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      left: 29.7%;
+    }
+
     @media (max-width: 1024px) {
       display: none;
     }
@@ -866,6 +915,19 @@ export default {
     color: $color-white;
     opacity: 0.8;
     margin-left: 40px;
+
+    @media (height: 912px) and (width: 1368px) {
+      max-width: 85%;
+    }
+
+    @media (height: 768px) and (width: 1366px) {
+      max-width: 80%;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
 
     @media (max-width: 1024px) {
       grid-column: 1 / span 3;
@@ -922,6 +984,15 @@ export default {
     margin: 0px 0 5px 40px;
     width: 500px;
 
+    @media (height: 960px) and (width: 1440px) {
+      max-width: 80%;
+    }
+
+    @media (height: 912px) and (width: 1368px) {
+      max-width: 90%;
+      padding-top: 11px;
+    }
+
     @media (height: 768px) and (width: 1366px) {
       font-size: 23px;
       max-width: 85%;
@@ -939,6 +1010,11 @@ export default {
       text-align: center;
       width: 100%;
     }
+
+    @media (height: 640px) and (width: 360px) {
+      font-size: 23px;
+      padding-top: 45px;
+    }
   }
 
   &__wrapper-1 {
@@ -949,12 +1025,28 @@ export default {
     padding-right: 25px;
     min-height: 870px;
 
+    @media (height: 960px) and (width: 1440px) {
+      width: 27.7%;
+      margin-top: 19px;
+      padding-right: 0px;
+    }
+
+    @media (height: 912px) and (width: 1368px) {
+      width: 28.7%;
+      margin-top: 38px;
+      padding-right: 0px;
+    }
+
     @media (height: 768px) and (width: 1366px) {
+      width: 27.7%;
       margin-top: 54px;
+      padding-right: 0px;
     }
 
     @media (height: 800px) and (width: 1280px) {
+      width: 27.7%;
       margin-top: 44px;
+      padding-right: 0px;
     }
   }
 

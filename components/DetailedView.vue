@@ -419,6 +419,10 @@ export default {
       font-size: 16;
       color: $color-white;
       opacity: 0.8;
+
+      @media (height: 640px) and (width: 360px) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -630,6 +634,10 @@ export default {
     @media (max-width: 800px) {
       margin-top: 26px;
       margin-left: 20px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      margin-left: 0px;
     }
   }
 }

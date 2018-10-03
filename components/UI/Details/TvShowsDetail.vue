@@ -258,6 +258,10 @@ export default {
     border-style: solid;
     border-width: 0 13px 13px 13px;
     border-color: transparent transparent $color-white transparent;
+
+    @media (height: 912px) and (width: 1368px) {
+      right: 5.5%;
+    }
   }
 
   &__wrapper {

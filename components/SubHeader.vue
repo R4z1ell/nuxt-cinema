@@ -142,6 +142,10 @@ export default {
   @media (max-width: 470px) {
     margin-right: 24px;
   }
+
+  @media (height: 640px) and (width: 360px) {
+    margin-right: 16px;
+  }
 }
 
 .sub-header {
@@ -151,6 +155,11 @@ export default {
   height: 80px;
   background-color: $color-primary-light;
   z-index: 15;
+
+  @media (height: 640px) and (width: 360px) {
+    height: 60px;
+    max-width: 360px;
+  }
 
   &__logo-1 {
     width: 150px;
@@ -194,6 +203,11 @@ export default {
     @media (max-width: 1020px) {
       display: none;
     }
+
+    @media (height: 640px) and (width: 360px) {
+      height: 56px;
+      max-width: 360px;
+    }
   }
 
   &__logo-2 {
@@ -226,6 +240,10 @@ export default {
 
     @media (max-width: 470px) {
       left: 4%;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      left: 46%;
     }
   }
 
@@ -290,6 +308,10 @@ export default {
     flex-direction: column;
     margin-left: 20px;
     cursor: pointer;
+
+    @media (height: 640px) and (width: 360px) {
+      margin-left: 15px;
+    }
   }
 
   &__quad {

@@ -58,8 +58,12 @@ export default {
   margin-bottom: 15px;
 
   @media (height: 768px) and (width: 1366px) {
-    margin-top: 20px;
+    margin-top: 23px;
     margin-bottom: 12px;
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    margin-top: 0px;
   }
 
   &__icon {
@@ -70,6 +74,14 @@ export default {
 
     @media (height: 768px) and (width: 1366px) {
       width: 39px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      width: 39px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      width: 37px;
     }
 
     &:hover {
@@ -108,6 +120,10 @@ export default {
     grid-gap: 30px;
   }
 
+  @media (height: 912px) and (width: 1368px) {
+    padding-top: 54px;
+  }
+
   @media (height: 800px) and (width: 1280px) {
     transform: translateY(24.6%);
   }
@@ -136,12 +152,20 @@ export default {
     grid-gap: 20px;
   }
 
+  @media (height: 736px) and (width: 414px) {
+    transform: translateY(18.6%);
+  }
+
   @media (max-width: 400px) {
     grid-gap: 10px;
   }
 
   @media (max-width: 370px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    transform: translateY(19%);
   }
 }
 
@@ -162,6 +186,10 @@ export default {
 
   @media (max-width: 1024px) {
     transform: translateY(13.6%);
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    transform: translateY(14.6%);
   }
 }
 </style>

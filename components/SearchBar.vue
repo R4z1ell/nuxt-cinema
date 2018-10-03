@@ -52,6 +52,10 @@ export default {
     margin-right: 12px;
   }
 
+  @media (height: 736px) and (width: 414px) {
+    margin-right: 21px;
+  }
+
   @media (max-width: 400px) {
     margin-right: 14px;
   }
@@ -62,6 +66,10 @@ export default {
 
   @media (max-width: 370px) {
     margin-right: 11px;
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    margin-right: 20px;
   }
 
   &__icon {
@@ -89,6 +97,10 @@ export default {
 
     @media (max-width: 390px) {
       width: 220px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      width: 192px;
     }
 
     @media (max-width: 320px) {

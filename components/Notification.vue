@@ -147,6 +147,10 @@ export default {
     @media (max-width: 430px) {
       right: 5%;
     }
+
+    @media (height: 640px) and (width: 360px) {
+      right: 4%;
+    }
   }
 }
 </style>

@@ -62,15 +62,17 @@ export default {
   }
 
   &__image {
-    //height: 490.5px;
-    //width: 327px;
     height: 100%;
     width: 100%;
     transition: transform 0.3s;
     border: solid 1px $color-blue;
 
-    @media (max-width: 450px) {
-      //height: 420px;
+    @media (height: 768px) and (width: 1366px) {
+      height: 344px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      height: 318px;
     }
 
     &:hover {

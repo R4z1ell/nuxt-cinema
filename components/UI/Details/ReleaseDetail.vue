@@ -101,6 +101,10 @@ export default {
       right: 13.8%;
     }
 
+    @media (height: 912px) and (width: 1368px) {
+      right: 12.8%;
+    }
+
     @media (height: 768px) and (width: 1366px) {
       right: 12.8%;
     }

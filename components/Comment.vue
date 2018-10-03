@@ -77,6 +77,10 @@ export default {
     opacity: 0.85;
     margin: 0 0 10px 10px;
     padding: 7px;
+
+    @media (height: 640px) and (width: 360px) {
+      font-size: 16px;
+    }
   }
 }
 </style>

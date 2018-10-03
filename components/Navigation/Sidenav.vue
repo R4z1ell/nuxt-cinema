@@ -49,6 +49,10 @@ export default {
   width: 430px;
   background-color: $color-sidenav;
 
+  @media (height: 640px) and (width: 360px) {
+    width: 360px;
+  }
+
   &__item {
     color: $color-gray;
     padding: 25px 0px;
