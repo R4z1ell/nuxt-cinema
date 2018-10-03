@@ -21,7 +21,7 @@
           {{ this.movie[0].genres[0].name }} {{ checkIfTwoGenres }} {{ checkIfGenreTwo }} 
           &nbsp; &#8901; &nbsp; {{ checkRelease }} &nbsp; &#8901; &nbsp; {{ checkRuntime | runtime }}
         </h3>
-        <img :src="image" alt="poster" class="movie__poster">
+        <img :src="image" alt="poster" class="movie__poster-1">
       </div>
       <span class="movie__divider"></span>
       <div class="movie__content">
@@ -34,9 +34,9 @@
             &nbsp; &#8901; &nbsp; {{ checkRelease }} &nbsp; &#8901; &nbsp; {{ checkRuntime | runtime }}
           </h3>
         </div>
-        <img :src="imgOne" alt="backdrop-image" class="movie__image" @click="showImageOne">
-        <img :src="imgTwo" alt="backdrop-image" class="movie__image" @click="showImageTwo">
-        <img :src="imgThree" alt="backdrop-image" class="movie__image" @click="showImageThree">
+          <img :src="imgOne" alt="backdrop-image" class="movie__image movie__image-1" @click="showImageOne">
+          <img :src="imgTwo" alt="backdrop-image" class="movie__image movie__image-2" @click="showImageTwo">
+          <img :src="imgThree" alt="backdrop-image" class="movie__image movie__image-3" @click="showImageThree">
         <div class="movie__cast-container">
           <div class="movie__btn-container">
             <button-trailer class="movie__btn-trailer" @click="showTrailer" :style="checkIfComment">Watch Trailer</button-trailer>
@@ -208,9 +208,12 @@ export default {
     },
     castStyle() {
       if (this.windowWidth <= 1007) {
-        return "margin: 0 15px 0 0";
+        return "margin: 0px 15px 0 15px";
+      }
+      if (this.windowWidth <= 770) {
+        return "margin: 28px 15px 0 15px";
       } else {
-        return "margin: 0 35px 0 150px";
+        return "margin-right: 35px";
       }
     },
     checkIfTrailer() {
@@ -262,8 +265,6 @@ export default {
         Object.keys(this.movie[0].original_name).length !== 0
       ) {
         return "font-size: 25px";
-      } else {
-        return "font-size: 33px";
       }
     },
     movie() {
@@ -454,7 +455,7 @@ export default {
 };
 </script>
 
-// ! Fix the Notification icon position on the alarm icon
+// ! Fix the 'undefined' videos property when clicking on an actor's name
 <style lang="scss">
 @import "../../../assets/scss/variables";
 
@@ -468,6 +469,13 @@ export default {
 
   @media (max-width: 1024px) {
     top: 16.7%;
+  }
+
+  &__btn-container {
+    @media (max-width: 780px) {
+      justify-self: center;
+      margin-bottom: 25px;
+    }
   }
 
   &__btn-trailer {
@@ -513,12 +521,26 @@ export default {
   &__cast-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     grid-column: 1 / span 3;
     margin-top: 35px;
+
+    @media (height: 768px) and (width: 1366px) {
+      margin-top: 25px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      margin-top: 25px;
+    }
 
     @media (max-width: 1024px) {
       align-items: center;
       margin-top: 22px;
+    }
+
+    @media (max-width: 780px) {
+      display: grid;
+      grid-template-columns: 1fr;
     }
   }
 
@@ -526,7 +548,14 @@ export default {
     font-size: 25px;
     font-weight: 700;
     color: $color-white;
-    margin: 40px 35px 0 258px;
+
+    @media (height: 768px) and (width: 1366px) {
+      font-size: 21px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      font-size: 21px;
+    }
 
     @media (max-width: 1024px) {
       font-size: 19px;
@@ -538,8 +567,24 @@ export default {
       margin-right: 5px;
       transition: color 0.2s;
 
+      @media (height: 768px) and (width: 1366px) {
+        font-size: 19px;
+      }
+
+      @media (height: 800px) and (width: 1280px) {
+        font-size: 19px;
+      }
+
       @media (max-width: 1024px) {
         font-size: 19px;
+      }
+
+      @media (max-width: 800px) {
+        font-size: 17px;
+      }
+
+      @media (max-width: 700px) {
+        font-size: 16px;
       }
 
       &:hover {
@@ -564,10 +609,112 @@ export default {
     grid-column-gap: 15px;
     //grid-template-rows: auto auto auto 1fr;
 
+    @media (max-width: 1780px) {
+      transform: translateX(42.1%);
+    }
+
+    @media (max-width: 1709px) {
+      transform: translateX(42%);
+    }
+
+    @media (max-width: 1644px) {
+      transform: translateX(41.9%);
+    }
+
+    @media (max-width: 1587px) {
+      transform: translateX(41.8%);
+    }
+
+    @media (max-width: 1531px) {
+      transform: translateX(41.7%);
+    }
+
+    @media (max-width: 1480px) {
+      transform: translateX(41.6%);
+    }
+
+    @media (max-width: 1431px) {
+      transform: translateX(41.5%);
+    }
+
+    @media (max-width: 1387px) {
+      transform: translateX(41.4%);
+    }
+
+    @media (height: 768px) and (width: 1366px) {
+      padding-top: 83px;
+      padding-left: 0px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      padding-top: 83px;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 1345px) {
+      transform: translateX(41.3%);
+    }
+
+    @media (max-width: 1305px) {
+      transform: translateX(41.2%);
+    }
+
+    @media (max-width: 1268px) {
+      transform: translateX(41.1%);
+    }
+
+    @media (max-width: 1232px) {
+      transform: translateX(41%);
+    }
+
+    @media (max-width: 1200px) {
+      transform: translateX(40.9%);
+    }
+
+    @media (max-width: 1168px) {
+      transform: translateX(40.8%);
+    }
+
+    @media (max-width: 1137px) {
+      transform: translateX(40.7%);
+    }
+
     @media (max-width: 1024px) {
       max-width: 100%;
       transform: translateX(-2%);
       padding-top: 0px;
+    }
+
+    @media (max-width: 910px) {
+      transform: translateX(-2.5%);
+    }
+
+    @media (max-width: 840px) {
+      transform: translateX(-2.8%);
+    }
+
+    @media (max-width: 760px) {
+      transform: translateX(-3.1%);
+    }
+
+    @media (max-width: 700px) {
+      transform: translateX(-3.3%);
+    }
+
+    @media (max-width: 660px) {
+      transform: translateX(-3.5%);
+    }
+
+    @media (max-width: 640px) {
+      transform: translateX(-3.8%);
+    }
+
+    @media (max-width: 600px) {
+      padding-left: 25px;
+    }
+
+    @media (max-width: 500px) {
+      padding-left: 25px;
     }
 
     &::-webkit-scrollbar {
@@ -592,6 +739,14 @@ export default {
     margin-top: 10px;
     margin-right: 35px;
 
+    @media (height: 768px) and (width: 1366px) {
+      font-size: 18px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      font-size: 18px;
+    }
+
     @media (max-width: 1024px) {
       font-size: 17px;
     }
@@ -602,8 +757,20 @@ export default {
       font-weight: 700;
       color: $color-white;
 
+      @media (height: 768px) and (width: 1366px) {
+        font-size: 21px;
+      }
+
+      @media (height: 800px) and (width: 1280px) {
+        font-size: 21px;
+      }
+
       @media (max-width: 1024px) {
         font-size: 22px;
+      }
+
+      @media (max-width: 780px) {
+        margin-top: 25px;
       }
     }
   }
@@ -620,33 +787,69 @@ export default {
       justify-self: center;
     }
 
+    @media (max-width: 700px) {
+      grid-column: 1 / -1;
+      width: 75%;
+    }
+
+    &-1 {
+      @media (max-width: 700px) {
+        margin-bottom: 30px;
+      }
+    }
+
+    &-2 {
+      @media (max-width: 700px) {
+        margin-bottom: 30px;
+      }
+    }
+
+    &-3 {
+      @media (max-width: 700px) {
+        margin-bottom: 10px;
+      }
+    }
+
     &:hover {
       transform: scale(1.1);
       cursor: pointer;
     }
   }
 
-  &__poster {
+  &__poster-1 {
     //width: 487px;
     width: 89%;
     height: auto;
     //height: 730px;
     margin: 26px 0 0 40px;
 
+    @media (height: 768px) and (width: 1366px) {
+      width: 79%;
+    }
+
     @media (max-width: 1024px) {
       width: 77%;
     }
   }
 
+  &__poster-2 {
+    @media (max-width: 1024px) {
+      width: 200px;
+      height: auto;
+      grid-column: 1 / -1;
+    }
+  }
+
   &__divider {
     position: absolute;
-    top: 19.7%;
-    left: 27.5%;
+    //top: 19.7%;
+    //left: 27.5%;
     left: 29.3%;
     //margin-left: 40px;
-    transform: translateY(-19.7%);
+    //transform: translateY(0%);
     //height: 858px;
     height: 100%;
+    min-height: 858px;
     width: 1px;
     background-color: $color-white;
     opacity: 0.15;
@@ -719,6 +922,16 @@ export default {
     margin: 0px 0 5px 40px;
     width: 500px;
 
+    @media (height: 768px) and (width: 1366px) {
+      font-size: 23px;
+      max-width: 85%;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      font-size: 23px;
+      max-width: 85%;
+    }
+
     @media (max-width: 1024px) {
       grid-column: 2;
       padding-top: 35px;
@@ -735,6 +948,14 @@ export default {
     padding-bottom: 19px;
     padding-right: 25px;
     min-height: 870px;
+
+    @media (height: 768px) and (width: 1366px) {
+      margin-top: 54px;
+    }
+
+    @media (height: 800px) and (width: 1280px) {
+      margin-top: 44px;
+    }
   }
 
   &__wrapper-2 {

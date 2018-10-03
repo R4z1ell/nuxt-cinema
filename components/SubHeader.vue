@@ -138,6 +138,10 @@ export default {
 .divider {
   display: flex;
   margin-right: 43px;
+
+  @media (max-width: 470px) {
+    margin-right: 24px;
+  }
 }
 
 .sub-header {
@@ -220,12 +224,8 @@ export default {
       height: 35px;
     }
 
-    @media (max-width: 405px) {
-      left: 9.7%;
-    }
-
-    @media (max-width: 340px) {
-      left: 11.8%;
+    @media (max-width: 470px) {
+      left: 4%;
     }
   }
 

@@ -25,7 +25,9 @@
           ></star-rating>
           <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote</p>
         </div>
-        <img :src="image" alt="movie-image" class="view__image-2">
+        <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
+          <img :src="image" alt="movie-image" class="view__image-2">
+        </nuxt-link>
         <div class="view__btn">
           <button-trailer @click="showTrailer">Watch Trailer</button-trailer>
           <button-watchlist @click="onAgree" class="view__btn--list">

@@ -53,6 +53,14 @@ export default {
   display: flex;
   flex-direction: column;
 
+  @media (height: 768px) and (width: 1366px) {
+    transform: translateY(12.1%);
+  }
+
+  @media (max-width: 320px) {
+    transform: translateY(15.1%);
+  }
+
   &__image {
     //height: 490.5px;
     //width: 327px;

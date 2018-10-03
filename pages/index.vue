@@ -57,11 +57,20 @@ export default {
   margin-top: -20px;
   margin-bottom: 15px;
 
+  @media (height: 768px) and (width: 1366px) {
+    margin-top: 20px;
+    margin-bottom: 12px;
+  }
+
   &__icon {
     cursor: pointer;
     width: 45px;
     height: 45px;
     transition: all 0.1s;
+
+    @media (height: 768px) and (width: 1366px) {
+      width: 39px;
+    }
 
     &:hover {
       transform: translateY(-1.5px);
@@ -97,6 +106,10 @@ export default {
 
   @media (max-width: 1400px) {
     grid-gap: 30px;
+  }
+
+  @media (height: 800px) and (width: 1280px) {
+    transform: translateY(24.6%);
   }
 
   @media (max-width: 1250px) {
@@ -138,6 +151,14 @@ export default {
   padding: 40px;
   height: 100vh;
   transform: translateY(19.6%);
+
+  @media (height: 768px) and (width: 1366px) {
+    transform: translateY(24.5%);
+  }
+
+  @media (height: 800px) and (width: 1280px) {
+    transform: translateY(22.6%);
+  }
 
   @media (max-width: 1024px) {
     transform: translateY(13.6%);

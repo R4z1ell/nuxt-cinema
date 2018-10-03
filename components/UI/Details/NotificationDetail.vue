@@ -58,9 +58,17 @@ export default {
   background-color: $color-white;
   position: absolute;
   top: 80%;
-  right: 4.45%;
+  right: 0.8%;
   border-radius: 5px;
   z-index: 500;
+
+  @media (height: 768px) and (width: 1366px) {
+    max-height: 648px;
+  }
+
+  @media (height: 800px) and (width: 1280px) {
+    max-height: 650px;
+  }
 
   /* width */
   &::-webkit-scrollbar {

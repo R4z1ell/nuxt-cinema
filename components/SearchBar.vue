@@ -36,6 +36,34 @@ export default {
   position: relative;
   margin-right: 24px;
 
+  @media (max-width: 430px) {
+    margin-right: 15px;
+  }
+
+  @media (max-width: 420px) {
+    margin-right: 10px;
+  }
+
+  @media (max-width: 416px) {
+    margin-right: 20px;
+  }
+
+  @media (max-width: 414px) {
+    margin-right: 12px;
+  }
+
+  @media (max-width: 400px) {
+    margin-right: 14px;
+  }
+
+  @media (max-width: 390px) {
+    margin-right: 16px;
+  }
+
+  @media (max-width: 370px) {
+    margin-right: 11px;
+  }
+
   &__icon {
     position: absolute;
     left: 25px;
@@ -50,6 +78,22 @@ export default {
     border-radius: 50px;
     padding-left: 55px;
     color: $color-white;
+
+    @media (max-width: 416px) {
+      width: 240px;
+    }
+
+    @media (max-width: 400px) {
+      width: 225px;
+    }
+
+    @media (max-width: 390px) {
+      width: 220px;
+    }
+
+    @media (max-width: 320px) {
+      width: 187px;
+    }
 
     &:focus,
     &:active {

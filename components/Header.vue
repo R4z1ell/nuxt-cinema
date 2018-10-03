@@ -17,7 +17,7 @@
       <div class="header__wrapper">
         <search-bar />
         <Notification @alert="alertDetail = !alertDetail"/>
-        <Profile @show="toggleDetail = !toggleDetail"/>
+        <Profile @show="toggleDetail = !toggleDetail" v-if="false"/>
         <account-detail v-if="toggleDetail" v-on-clickaway="awayAccount"/>
         <svg v-if="alertDetail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="arrow" version="1.1" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 292.362 292.361" style="enable-background:new 0 0 292.362 292.361;" xml:space="preserve">
           <g>
@@ -146,6 +146,42 @@ export default {
     top: 5%;
     left: 45.9%;
 
+    @media (max-width: 1860px) {
+      left: 45.8%;
+    }
+
+    @media (max-width: 1800px) {
+      left: 45.6%;
+    }
+
+    @media (max-width: 1720px) {
+      left: 45.4%;
+    }
+
+    @media (max-width: 1600px) {
+      left: 45.1%;
+    }
+
+    @media (max-width: 1462px) {
+      left: 44.7%;
+    }
+
+    @media (max-width: 1340px) {
+      left: 44.1%;
+    }
+
+    @media (max-width: 1200px) {
+      left: 43.5%;
+    }
+
+    @media (max-width: 1166px) {
+      left: 43.3%;
+    }
+
+    @media (max-width: 1100px) {
+      left: 43%;
+    }
+
     @media (max-width: 1024px) {
       display: none;
     }
@@ -154,18 +190,30 @@ export default {
   &__wrapper {
     display: flex;
     align-items: center;
-    margin-right: 43px;
+    margin-right: 19px;
 
     @media (max-width: 1024px) {
-      margin-right: 5px;
+      margin-right: 19px;
+    }
+
+    @media (max-width: 470px) {
+      margin-right: 0px;
     }
   }
 }
 
 .arrow {
   position: absolute;
-  right: 7.05%;
+  right: 2.35%;
   top: 86px;
+
+  @media (height: 768px) and (width: 1366px) {
+    right: 3.3%;
+  }
+
+  @media (height: 800px) and (width: 1280px) {
+    right: 3.6%;
+  }
 }
 </style>
 

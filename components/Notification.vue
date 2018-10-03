@@ -28,7 +28,7 @@ export default {
 
   &__span {
     position: absolute;
-    right: 6.8%;
+    right: 2.1%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,6 +39,114 @@ export default {
     font-weight: 700;
     color: $color-white;
     background-color: $color-secondary;
+
+    @media (max-width: 1820px) {
+      right: 2.2%;
+    }
+
+    @media (max-width: 1760px) {
+      right: 2.3%;
+    }
+
+    @media (max-width: 1680px) {
+      right: 2.4%;
+    }
+
+    @media (max-width: 1620px) {
+      right: 2.5%;
+    }
+
+    @media (max-width: 1540px) {
+      right: 2.6%;
+    }
+
+    @media (max-width: 1480px) {
+      right: 2.7%;
+    }
+
+    @media (max-width: 1440px) {
+      right: 2.8%;
+    }
+
+    @media (max-width: 1380px) {
+      right: 3%;
+    }
+
+    @media (max-width: 1260px) {
+      right: 3.2%;
+    }
+
+    @media (max-width: 1180px) {
+      right: 3.4%;
+    }
+
+    @media (max-width: 1140px) {
+      right: 3.5%;
+    }
+
+    @media (max-width: 1100px) {
+      right: 3.7%;
+    }
+
+    @media (max-width: 1060px) {
+      right: 3.9%;
+    }
+
+    @media (max-width: 1024px) {
+      right: 3.9%;
+    }
+
+    @media (max-width: 940px) {
+      right: 4.2%;
+    }
+
+    @media (max-width: 880px) {
+      right: 4.5%;
+    }
+
+    @media (max-width: 840px) {
+      right: 4.7%;
+    }
+
+    @media (max-width: 800px) {
+      right: 5%;
+    }
+
+    @media (max-width: 740px) {
+      right: 5.5%;
+    }
+
+    @media (max-width: 690px) {
+      right: 5.8%;
+    }
+
+    @media (max-width: 670px) {
+      right: 6%;
+    }
+
+    @media (max-width: 630px) {
+      right: 6.5%;
+    }
+
+    @media (max-width: 580px) {
+      right: 7%;
+    }
+
+    @media (max-width: 540px) {
+      right: 7.4%;
+    }
+
+    @media (max-width: 500px) {
+      right: 8%;
+    }
+
+    @media (max-width: 470px) {
+      right: 4.7%;
+    }
+
+    @media (max-width: 430px) {
+      right: 5%;
+    }
   }
 }
 </style>

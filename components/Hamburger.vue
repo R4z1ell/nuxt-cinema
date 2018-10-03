@@ -19,6 +19,10 @@ export default {};
   margin-left: 40px;
   cursor: pointer;
 
+  @media (max-width: 470px) {
+    margin-left: 20px;
+  }
+
   &__bar {
     width: 90%;
     height: 4px;

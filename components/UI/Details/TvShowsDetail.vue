@@ -105,6 +105,10 @@ export default {
     left: 11.4%;
   }
 
+  @media (height: 768px) and (width: 1366px) {
+    left: 11.5%;
+  }
+
   @media (max-width: 1360px) {
     left: 11.5%;
   }
