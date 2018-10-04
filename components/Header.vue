@@ -96,12 +96,24 @@ export default {
     margin-left: 40px;
     margin-right: 10px;
 
+    @media (max-width: 400px) {
+      margin-left: 15px;
+    }
+
     @media (height: 736px) and (width: 414px) {
       margin-left: 14px;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      margin-left: 12px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       margin-left: 12px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      margin-left: 9px;
     }
   }
 
@@ -126,9 +138,28 @@ export default {
       height: 76px;
     }
 
+    @media (height: 1366px) and (width: 1024px) {
+      height: 130px;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      height: 76px;
+      max-width: 375px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      height: 76px;
+      max-width: 375px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       height: 76px;
       max-width: 360px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      height: 76px;
+      max-width: 320px;
     }
   }
 
@@ -213,8 +244,20 @@ export default {
       margin-right: 0px;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      margin-right: -8px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      margin-right: -8px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       margin-right: -8px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      margin-right: -11px;
     }
   }
 }
@@ -240,9 +283,106 @@ export default {
     right: 3.6%;
   }
 
+  @media (max-width: 1024px) {
+    right: 4.4%;
+    top: 59px;
+  }
+
+  @media (height: 1366px) and (width: 1024px) {
+    right: 4.35%;
+  }
+
+  @media (max-width: 988px) {
+    right: 4.6%;
+  }
+
+  @media (max-width: 934px) {
+    right: 4.8%;
+  }
+
+  @media (max-width: 882px) {
+    right: 5.1%;
+  }
+
+  @media (max-width: 844px) {
+    right: 5.3%;
+  }
+
+  @media (max-width: 800px) {
+    right: 5.6%;
+  }
+
   @media (height: 1024px) and (width: 768px) {
-    right: 6%;
+    right: 5.8%;
     top: 54px;
+  }
+
+  @media (max-width: 744px) {
+    right: 6%;
+  }
+
+  @media (max-width: 700px) {
+    right: 6.5%;
+  }
+
+  @media (max-width: 630px) {
+    right: 7.2%;
+  }
+
+  @media (max-width: 586px) {
+    right: 7.7%;
+  }
+
+  @media (max-width: 560px) {
+    right: 8.1%;
+  }
+
+  @media (max-width: 530px) {
+    right: 8.5%;
+  }
+
+  @media (max-width: 500px) {
+    right: 9%;
+  }
+
+  @media (max-width: 472px) {
+    right: 9.5%;
+  }
+
+  @media (max-width: 470px) {
+    right: 5.5%;
+  }
+
+  @media (height: 736px) and (width: 414px) {
+    right: 6.3%;
+  }
+
+  @media (max-width: 410px) {
+    right: 6.2%;
+  }
+
+  @media (max-width: 390px) {
+    right: 6.5%;
+  }
+
+  @media (height: 812px) and (width: 375px) {
+    right: 4.85%;
+    top: 57px;
+  }
+
+  @media (height: 667px) and (width: 375px) {
+    right: 5%;
+    top: 57px;
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    right: 5%;
+    top: 56px;
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    right: 4.8%;
+    top: 57px;
   }
 }
 </style>

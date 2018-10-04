@@ -466,6 +466,10 @@ export default {
       right: 17.5%;
     }
 
+    @media (height: 1366px) and (width: 1024px) {
+      right: 18.5%;
+    }
+
     @media (max-width: 920px) {
       right: 18.5%;
     }

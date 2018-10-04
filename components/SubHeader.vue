@@ -143,8 +143,16 @@ export default {
     margin-right: 24px;
   }
 
+  @media (height: 667px) and (width: 375px) {
+    margin-right: 17px;
+  }
+
   @media (height: 640px) and (width: 360px) {
     margin-right: 16px;
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    margin-right: 13px;
   }
 }
 
@@ -156,9 +164,28 @@ export default {
   background-color: $color-primary-light;
   z-index: 15;
 
+  @media (max-width: 400px) {
+    height: 60px;
+  }
+
+  @media (height: 812px) and (width: 375px) {
+    height: 60px;
+    max-width: 375px;
+  }
+
+  @media (height: 667px) and (width: 375px) {
+    height: 60px;
+    max-width: 375px;
+  }
+
   @media (height: 640px) and (width: 360px) {
     height: 60px;
     max-width: 360px;
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    height: 60px;
+    max-width: 320px;
   }
 
   &__logo-1 {
@@ -242,6 +269,14 @@ export default {
       left: 4%;
     }
 
+    @media (max-width: 400px) {
+      left: 45.4%;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      left: 45%;
+    }
+
     @media (height: 640px) and (width: 360px) {
       left: 46%;
     }
@@ -308,6 +343,14 @@ export default {
     flex-direction: column;
     margin-left: 20px;
     cursor: pointer;
+
+    @media (max-width: 400px) {
+      margin-left: 15px;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      margin-left: 15px;
+    }
 
     @media (height: 640px) and (width: 360px) {
       margin-left: 15px;

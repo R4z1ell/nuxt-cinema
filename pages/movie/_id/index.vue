@@ -5,13 +5,13 @@
       <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="100%" width="100%"></iframe>
       <!-- <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="600" width="1050"></iframe> -->
     </modal>
-    <modal name="backdrop-image-1" :width="780" :height="439">
+    <modal name="backdrop-image-1" :width="780" :height="439" v-if="windowWidth > 700">
       <img :src="imgOne" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
-    <modal name="backdrop-image-2" :width="780" :height="439">
+    <modal name="backdrop-image-2" :width="780" :height="439" v-if="windowWidth > 700">
       <img :src="imgTwo" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
-    <modal name="backdrop-image-3" :width="780" :height="439">
+    <modal name="backdrop-image-3" :width="780" :height="439" v-if="windowWidth > 700">
       <img :src="imgThree" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
     <div class="movie">
@@ -458,6 +458,8 @@ export default {
 </script>
 
 // ! Fix the 'undefined' videos property when clicking on an actor's name
+// ! Create a plugin for the movie score display
+// ! Create a better style for the "Add/Remove to Watchlist" button
 <style lang="scss">
 @import "../../../assets/scss/variables";
 
@@ -599,17 +601,12 @@ export default {
   &__content {
     background-color: $color-primary;
     max-width: 70.3%;
-    //min-width: 1338px;
-    //min-height: 870px;
-    //transform: translateX(42.2%);
     transform: translateX(42.2%);
     padding-left: 35px;
     padding-top: 35px;
     display: grid;
-    //grid-template-columns: 1fr 1fr 1fr;
     grid-template-columns: 32.5% 32.5% 32.6%;
     grid-column-gap: 15px;
-    //grid-template-rows: auto auto auto 1fr;
 
     @media (max-width: 1780px) {
       transform: translateX(42.1%);
@@ -735,8 +732,32 @@ export default {
       padding-left: 25px;
     }
 
+    @media (height: 736px) and (width: 414px) {
+      max-width: 388px;
+      padding-left: 0px;
+      transform: translateX(0.2%);
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      max-width: 348px;
+      padding-left: 0px;
+      transform: translateX(0.2%);
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      max-width: 348px;
+      padding-left: 0px;
+      transform: translateX(0.2%);
+    }
+
     @media (height: 640px) and (width: 360px) {
       max-width: 340px;
+      padding-left: 0px;
+      transform: translateX(-0.8%);
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      max-width: 300px;
       padding-left: 0px;
       transform: translateX(-0.8%);
     }
@@ -775,9 +796,28 @@ export default {
       font-size: 17px;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      margin-right: 0px;
+      max-width: 95%;
+      font-size: 16px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      margin-right: 0px;
+      max-width: 95%;
+      font-size: 16px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       margin-right: 0px;
       max-width: 95%;
+      font-size: 16px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      margin-right: 0px;
+      max-width: 95%;
+      font-size: 16px;
     }
 
     &--title {
@@ -800,6 +840,26 @@ export default {
 
       @media (max-width: 780px) {
         margin-top: 25px;
+      }
+
+      @media (height: 736px) and (width: 414px) {
+        font-size: 18px;
+      }
+
+      @media (height: 812px) and (width: 375px) {
+        font-size: 18px;
+      }
+
+      @media (height: 667px) and (width: 375px) {
+        font-size: 18px;
+      }
+
+      @media (height: 640px) and (width: 360px) {
+        font-size: 18px;
+      }
+
+      @media (height: 568px) and (width: 320px) {
+        font-size: 18px;
       }
     }
   }
@@ -879,18 +939,12 @@ export default {
 
   &__divider {
     position: absolute;
-    //top: 19.7%;
-    //left: 27.5%;
     left: 29.3%;
-    //margin-left: 40px;
-    //transform: translateY(0%);
-    //height: 858px;
     height: 100%;
     min-height: 858px;
     width: 1px;
     background-color: $color-white;
     opacity: 0.15;
-    //position: fixed;
 
     @media (height: 912px) and (width: 1368px) {
       left: 29.1%;
@@ -924,8 +978,23 @@ export default {
       max-width: 80%;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      font-size: 13px;
       margin-bottom: 25px;
     }
 
@@ -1011,9 +1080,37 @@ export default {
       width: 100%;
     }
 
+    @media (height: 1112px) and (width: 834px) {
+      padding-top: 0px;
+    }
+
+    @media (height: 1024px) and (width: 768px) {
+      padding-top: 10px;
+    }
+
+    @media (height: 736px) and (width: 414px) {
+      padding-top: 51px;
+      font-size: 29px;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      font-size: 22px;
+      padding-top: 18px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      font-size: 22px;
+      padding-top: 42px;
+    }
+
     @media (height: 640px) and (width: 360px) {
-      font-size: 23px;
+      font-size: 22px;
       padding-top: 45px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      font-size: 22px;
+      padding-top: 60px;
     }
   }
 

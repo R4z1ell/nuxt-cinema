@@ -62,7 +62,19 @@ export default {
     margin-bottom: 12px;
   }
 
+  @media (height: 736px) and (width: 414px) {
+    margin-top: -9px;
+  }
+
+  @media (height: 667px) and (width: 375px) {
+    margin-top: 0px;
+  }
+
   @media (height: 640px) and (width: 360px) {
+    margin-top: 0px;
+  }
+
+  @media (height: 568px) and (width: 320px) {
     margin-top: 0px;
   }
 
@@ -80,7 +92,23 @@ export default {
       width: 39px;
     }
 
+    @media (height: 736px) and (width: 414px) {
+      width: 37px;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      width: 37px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      width: 37px;
+    }
+
     @media (height: 640px) and (width: 360px) {
+      width: 37px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
       width: 37px;
     }
 
@@ -142,6 +170,10 @@ export default {
     grid-gap: 30px;
   }
 
+  @media (height: 1112px) and (width: 834px) {
+    transform: translateY(12.6%);
+  }
+
   @media (max-width: 680px) {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 30px;
@@ -160,12 +192,17 @@ export default {
     grid-gap: 10px;
   }
 
-  @media (max-width: 370px) {
+  @media (max-width: 375px) {
     grid-template-columns: repeat(1, 1fr);
+    transform: translateY(17.6%);
   }
 
   @media (height: 640px) and (width: 360px) {
     transform: translateY(19%);
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    transform: translateY(10.6%);
   }
 }
 
@@ -188,8 +225,20 @@ export default {
     transform: translateY(13.6%);
   }
 
+  @media (height: 1112px) and (width: 834px) {
+    transform: translateY(11.6%);
+  }
+
+  @media (height: 1024px) and (width: 768px) {
+    transform: translateY(11.6%);
+  }
+
   @media (height: 640px) and (width: 360px) {
     transform: translateY(14.6%);
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    transform: translateY(17.6%);
   }
 }
 </style>

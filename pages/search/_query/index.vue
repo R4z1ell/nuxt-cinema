@@ -20,7 +20,8 @@ export default {
   data() {
     return {
       toggleButton: true,
-      toggleNothing: false
+      toggleNothing: false,
+      windowWidth: 0
     };
   },
   components: {
@@ -39,15 +40,40 @@ export default {
     },
     checkPath() {
       let myString = this.$route.path;
-      if (myString.includes("search") && this.$store.state.view === false) {
+      if (
+        myString.includes("search") &&
+        this.$store.state.view === false &&
+        this.windowWidth > 375
+      ) {
         return "margin-top: -31px";
       }
-      if (myString.includes("search") && this.$store.state.view === true) {
+      if (
+        myString.includes("search") &&
+        this.$store.state.view === true &&
+        this.windowWidth > 375
+      ) {
         return "margin-top: 6px";
+      }
+      if (
+        myString.includes("search") &&
+        this.$store.state.view === false &&
+        this.windowWidth <= 375
+      ) {
+        return "margin-top: 0px";
+      }
+      if (
+        myString.includes("search") &&
+        this.$store.state.view === true &&
+        this.windowWidth <= 375
+      ) {
+        return "margin-top: 0px";
       }
     }
   },
   methods: {
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
     async nextPage() {
       let resMovie = await axios.get(
         "search/movie?api_key=" +
@@ -100,6 +126,15 @@ export default {
         });
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.getWindowWidth);
+      this.getWindowWidth();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWindowWidth);
+  },
   created() {
     this.searchMovie();
   }
@@ -114,6 +149,14 @@ export default {
   margin-top: 80%;
   margin-left: 242%;
   white-space: nowrap;
+
+  @media (height: 812px) and (width: 375px) {
+    margin-left: 13%;
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    margin-left: 12%;
+  }
 }
 </style>
 

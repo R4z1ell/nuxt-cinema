@@ -75,6 +75,14 @@ export default {
       height: 318px;
     }
 
+    @media (height: 1366px) and (width: 1024px) {
+      height: 317px;
+    }
+
+    @media (height: 1112px) and (width: 834px) {
+      height: 343px;
+    }
+
     &:hover {
       transform: scale(1.02);
       cursor: pointer;

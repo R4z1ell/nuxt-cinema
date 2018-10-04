@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="scroll">
     <Header class="fixed" @sidenavToggle="displaySidenav = true" />
     <sub-header :style="[windowWidth <= 1007 ? {'margin-top' : '75px'} : {'margin-top' : '129px'}]" class="fixed" />
     <!-- <sub-header style="margin-top: 130px" class="fixed" /> -->
@@ -62,6 +62,8 @@ export default {
 
 
 <style lang="scss">
+@import "../assets/scss/variables";
+
 .v--modal-overlay[data-modal="youtube-trailer-detail"] {
   background: rgba(black, 0.9);
 }
@@ -73,6 +75,27 @@ export default {
 .fixed {
   position: fixed;
   width: 100%;
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: $color-primary-light;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: $color-primary-light;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: $color-gray;
 }
 
 // Transition Animation

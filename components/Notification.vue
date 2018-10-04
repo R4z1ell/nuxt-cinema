@@ -148,8 +148,20 @@ export default {
       right: 5%;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      right: 3.5%;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      right: 3.6%;
+    }
+
     @media (height: 640px) and (width: 360px) {
       right: 4%;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      right: 3.5%;
     }
   }
 }

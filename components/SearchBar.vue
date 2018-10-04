@@ -64,12 +64,24 @@ export default {
     margin-right: 16px;
   }
 
+  @media (height: 812px) and (width: 375px) {
+    margin-right: 20px;
+  }
+
+  @media (height: 667px) and (width: 375px) {
+    margin-right: 20px;
+  }
+
   @media (max-width: 370px) {
     margin-right: 11px;
   }
 
   @media (height: 640px) and (width: 360px) {
     margin-right: 20px;
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    margin-right: 8px;
   }
 
   &__icon {
@@ -99,12 +111,24 @@ export default {
       width: 220px;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      width: 192px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      width: 192px;
+    }
+
     @media (height: 640px) and (width: 360px) {
       width: 192px;
     }
 
     @media (max-width: 320px) {
       width: 187px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      width: 175px;
     }
 
     &:focus,

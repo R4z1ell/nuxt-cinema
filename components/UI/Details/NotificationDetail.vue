@@ -12,7 +12,7 @@
             </g>
           </svg>
         </div>
-        <p class="notification-detail__container--added">3 days ago</p>
+        <!-- <p class="notification-detail__container--added">3 days ago</p> -->
         <button-trailer 
           class="notification-detail__trailer" 
           @click="$modal.show('youtube-notification', {trailer: movie.trailerLink})">
@@ -70,8 +70,52 @@ export default {
     max-height: 650px;
   }
 
+  @media (max-width: 1024px) {
+    top: 95%;
+  }
+
   @media (height: 1024px) and (width: 768px) {
     top: 91%;
+  }
+
+  @media (max-width: 560px) {
+    right: 1.8%;
+  }
+
+  @media (max-width: 490px) {
+    width: 93%;
+  }
+
+  @media (height: 736px) and (width: 414px) {
+    max-height: 430px;
+  }
+
+  @media (height: 812px) and (width: 375px) {
+    width: 91%;
+    max-height: 420px;
+    top: 90%;
+    right: 3.8%;
+  }
+
+  @media (height: 667px) and (width: 375px) {
+    width: 93%;
+    max-height: 420px;
+    top: 90%;
+    right: 2.5%;
+  }
+
+  @media (height: 640px) and (width: 360px) {
+    width: 91%;
+    max-height: 420px;
+    top: 90%;
+    right: 3.8%;
+  }
+
+  @media (height: 568px) and (width: 320px) {
+    width: 91%;
+    max-height: 390px;
+    top: 90%;
+    right: 3.8%;
   }
 
   /* width */
@@ -96,18 +140,55 @@ export default {
     background: darken($color-blue, 10%);
   }
 
-  &__trailer,
-  &__tickets {
+  &__trailer {
     width: 150px;
     height: 38px;
     font-size: 14px;
     font-weight: 400;
-    margin-left: 63px;
-  }
+    margin-top: 25%;
 
-  &__trailer {
-    margin-top: 55px;
-    margin-bottom: 8px;
+    @media (max-width: 490px) {
+      margin-left: -6%;
+    }
+
+    @media (max-width: 477px) {
+      margin-left: -9.5%;
+    }
+
+    @media (max-width: 457px) {
+      margin-left: -15.5%;
+    }
+
+    @media (max-width: 446px) {
+      margin-left: -21.5%;
+    }
+
+    @media (max-width: 430px) {
+      margin-left: -25.5%;
+    }
+
+    @media (height: 736px) and (width: 414px) {
+      margin-left: -22.5%;
+    }
+
+    @media (max-width: 410px) {
+      margin-left: -32.5%;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      margin-left: -34%;
+      margin-top: 20%;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      margin-left: -40%;
+      margin-top: 21%;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      margin-left: -45.5%;
+      margin-top: 18%;
+    }
   }
 
   &__tickets {
@@ -129,6 +210,7 @@ export default {
   &__container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     &--cross {
       cursor: pointer;
@@ -136,6 +218,75 @@ export default {
       right: 2%;
       top: 45%;
       margin-top: 4px;
+
+      @media (max-width: 490px) {
+        right: 8%;
+      }
+
+      @media (max-width: 480px) {
+        right: 9%;
+      }
+
+      @media (max-width: 475px) {
+        right: 8%;
+      }
+
+      @media (max-width: 465px) {
+        right: 10%;
+      }
+
+      @media (max-width: 457px) {
+        right: 11%;
+      }
+
+      @media (max-width: 447px) {
+        right: 14%;
+      }
+
+      @media (max-width: 435px) {
+        right: 16%;
+      }
+
+      @media (max-width: 424px) {
+        right: 19%;
+      }
+
+      @media (height: 736px) and (width: 414px) {
+        right: 25.4%;
+      }
+
+      @media (max-width: 410px) {
+        right: 22.5%;
+      }
+
+      @media (max-width: 390px) {
+        right: 28%;
+      }
+
+      @media (max-width: 390px) {
+        right: 30%;
+      }
+
+      @media (height: 812px) and (width: 375px) {
+        right: 34%;
+        top: 39%;
+      }
+
+      @media (height: 667px) and (width: 375px) {
+        right: 32%;
+      }
+
+      @media (max-width: 370px) {
+        right: 32.2%;
+      }
+
+      @media (height: 640px) and (width: 360px) {
+        right: 40%;
+      }
+
+      @media (height: 568px) and (width: 320px) {
+        right: 47%;
+      }
     }
 
     &--divider {
@@ -152,6 +303,35 @@ export default {
       margin-top: 16px;
       word-wrap: break-word;
       max-width: 255px;
+
+      @media (max-width: 500px) {
+        font-size: 17px;
+        max-width: 80%;
+      }
+
+      @media (max-width: 486px) {
+        max-width: 80%;
+      }
+
+      @media (max-width: 450px) {
+        font-size: 14px;
+        max-width: 60%;
+      }
+
+      @media (height: 812px) and (width: 375px) {
+        font-size: 14px;
+        max-width: 60%;
+      }
+
+      @media (height: 640px) and (width: 360px) {
+        font-size: 14px;
+        max-width: 60%;
+      }
+
+      @media (height: 568px) and (width: 320px) {
+        font-size: 13px;
+        max-width: 41%;
+      }
     }
 
     &--added {
@@ -169,6 +349,39 @@ export default {
     height: 212px;
     margin: 16px;
     box-shadow: 0px 0px 10px rgba(73, 74, 78, 0.205);
+
+    @media (max-width: 500px) {
+      width: 28%;
+      height: 180px;
+    }
+
+    @media (height: 736px) and (width: 414px) {
+      width: 31%;
+    }
+
+    @media (height: 812px) and (width: 375px) {
+      width: 111px;
+      height: 177px;
+      margin-left: 12px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      width: 111px;
+      height: 177px;
+      margin-left: 12px;
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      width: 34%;
+      height: 177px;
+      margin-left: 12px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      width: 34%;
+      height: 160px;
+      margin-left: 10px;
+    }
   }
 
   &__span {

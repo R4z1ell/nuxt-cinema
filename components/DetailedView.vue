@@ -18,7 +18,7 @@
             style="margin-bottom: 7px"
             class="stars" 
             :increment="0.5" 
-            :star-size="25" 
+            :star-size="this.checkWidth" 
             :show-rating="false" 
             active-color="#FF6500"
             :rounded-corners="true"
@@ -59,7 +59,8 @@ import StarRating from "vue-star-rating";
 export default {
   data() {
     return {
-      readMore: true
+      readMore: true,
+      windowWidth: 0
     };
   },
   props: {
@@ -93,6 +94,13 @@ export default {
         return "  read less";
       } else {
         return "  read more";
+      }
+    },
+    checkWidth() {
+      if (this.windowWidth <= 320) {
+        return 18;
+      } else {
+        return 25;
       }
     },
     checkDot() {
@@ -287,6 +295,9 @@ export default {
     }
   },
   methods: {
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
     showTrailer() {
       const id = this.movie.id;
       if (
@@ -366,6 +377,15 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.getWindowWidth);
+      this.getWindowWidth();
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWindowWidth);
   }
 };
 </script>
@@ -420,7 +440,19 @@ export default {
       color: $color-white;
       opacity: 0.8;
 
+      @media (height: 812px) and (width: 375px) {
+        font-size: 12px;
+      }
+
+      @media (height: 667px) and (width: 375px) {
+        font-size: 12px;
+      }
+
       @media (height: 640px) and (width: 360px) {
+        font-size: 12px;
+      }
+
+      @media (height: 568px) and (width: 320px) {
         font-size: 12px;
       }
     }
@@ -598,6 +630,30 @@ export default {
     @media (max-width: 500px) {
       font-size: 19px;
     }
+
+    @media (height: 812px) and (width: 375px) {
+      font-size: 17px;
+      text-align: center;
+      transform: translateY(-30%);
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      font-size: 17px;
+      text-align: center;
+      transform: translateY(-30%);
+    }
+
+    @media (height: 640px) and (width: 360px) {
+      font-size: 17px;
+      text-align: center;
+      transform: translateY(-30%);
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      font-size: 16px;
+      text-align: center;
+      transform: translateY(-30%);
+    }
   }
 
   &__genre {
@@ -612,6 +668,10 @@ export default {
 
     @media (max-width: 799px) {
       margin: 0 0 0 0;
+    }
+
+    @media (height: 568px) and (width: 320px) {
+      font-size: 13px;
     }
   }
 
@@ -636,7 +696,19 @@ export default {
       margin-left: 20px;
     }
 
+    @media (height: 812px) and (width: 375px) {
+      margin-left: 0px;
+    }
+
+    @media (height: 667px) and (width: 375px) {
+      margin-left: 0px;
+    }
+
     @media (height: 640px) and (width: 360px) {
+      margin-left: 0px;
+    }
+
+    @media (height: 568px) and (width: 320px) {
       margin-left: 0px;
     }
   }

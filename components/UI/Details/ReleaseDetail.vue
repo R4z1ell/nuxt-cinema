@@ -5,7 +5,6 @@
       <nuxt-link :to="{ path: popular }" class="release-detail__popular" @click.native="changeView">Popular</nuxt-link>
       <nuxt-link :to="{ path: topRated }" class="release-detail__top" @click.native="changeView">Top Rated</nuxt-link>
       <nuxt-link :to="{ path: upcoming }" class="release-detail__upcoming" @click.native="changeView">Upcoming</nuxt-link>
-      <div class="separator"></div>
       <nuxt-link :to="{ path: nowPlaying }" class="release-detail__theater" @click.native="changeView">In Theaters</nuxt-link>
     </div>
   </div>
@@ -74,16 +73,6 @@ export default {
       color: $color-secondary;
       opacity: 1;
       transition: all 0.2s;
-    }
-  }
-
-  &__theater {
-    color: $color-gold;
-    opacity: 1;
-
-    &:hover {
-      color: $color-gold;
-      opacity: 1;
     }
   }
 
