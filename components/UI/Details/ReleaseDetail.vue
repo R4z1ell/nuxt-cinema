@@ -79,7 +79,7 @@ export default {
   &__triangle {
     position: absolute;
     top: -6%;
-    right: 14.5%;
+    right: 14.8%;
     width: 0;
     height: 0;
     border-style: solid;

@@ -252,7 +252,7 @@ export default {
   &__triangle {
     position: absolute;
     top: -6%;
-    right: 6.5%;
+    right: 7.5%;
     width: 0;
     height: 0;
     border-style: solid;

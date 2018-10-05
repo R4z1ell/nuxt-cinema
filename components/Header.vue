@@ -265,7 +265,7 @@ export default {
 .arrow {
   position: absolute;
   right: 2.35%;
-  top: 86px;
+  top: 88px;
 
   @media (height: 960px) and (width: 1440px) {
     right: 3.1%;

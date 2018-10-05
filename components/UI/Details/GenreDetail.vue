@@ -310,6 +310,10 @@ export default {
     border-width: 0 13px 13px 13px;
     border-color: transparent transparent $color-white transparent;
 
+    @media (max-width: 1920px) {
+      right: 20.5%;
+    }
+
     @media (max-width: 1880px) {
       right: 16.5%;
     }
