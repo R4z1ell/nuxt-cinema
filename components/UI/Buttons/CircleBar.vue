@@ -1,6 +1,8 @@
 <template>
   <div class="pie-wrapper style-2" :class="[checkVote]">
-    <span class="label" :style="[this.rating < 10 ? {'left': '0.8em'} : {'left': '0.5em'}]">{{ rating }}</span>
+    <span class="label" :style="[this.rating === 0 ? {'left': '0.82em'} : {'left': '0.55em'}]">
+      {{ rating | ratingFormat }}
+    </span>
     <div class="pie">
       <div class="left-side half-circle"></div>
       <div class="right-side half-circle"></div>
@@ -14,29 +16,29 @@ export default {
   props: ["rating"],
   computed: {
     checkVote() {
-      if (this.rating <= 10) return "progress-10";
-      if (this.rating > 10 && this.rating <= 15) return "progress-15";
-      if (this.rating > 15 && this.rating <= 20) return "progress-20";
-      if (this.rating > 20 && this.rating <= 25) return "progress-25";
-      if (this.rating > 25 && this.rating <= 30) return "progress-30";
-      if (this.rating > 30 && this.rating <= 35) return "progress-35";
-      if (this.rating > 35 && this.rating <= 40) return "progress-40";
-      if (this.rating > 40 && this.rating <= 45) return "progress-45";
-      if (this.rating > 45 && this.rating <= 50) return "progress-50";
-      if (this.rating > 50 && this.rating <= 55) return "progress-55";
-      if (this.rating > 55 && this.rating <= 60) return "progress-60";
-      if (this.rating > 60 && this.rating <= 65) return "progress-65";
-      if (this.rating > 65 && this.rating <= 70) return "progress-70";
-      if (this.rating > 70 && this.rating <= 75) return "progress-75";
-      if (this.rating > 75 && this.rating <= 80) return "progress-80";
-      if (this.rating > 80 && this.rating <= 85) return "progress-85";
-      if (this.rating > 85 && this.rating <= 90) return "progress-90";
-      if (this.rating > 90 && this.rating <= 95) return "progress-95";
-      if ((this.rating = 96)) return "progress-96";
-      if ((this.rating = 97)) return "progress-97";
-      if ((this.rating = 98)) return "progress-98";
-      if ((this.rating = 99)) return "progress-99";
-      if ((this.rating = 100)) return "progress-100";
+      if (this.rating <= 1.0) return "progress-10";
+      if (this.rating > 1.0 && this.rating <= 1.5) return "progress-15";
+      if (this.rating > 1.5 && this.rating <= 2.0) return "progress-20";
+      if (this.rating > 2.0 && this.rating <= 2.5) return "progress-25";
+      if (this.rating > 2.5 && this.rating <= 3.0) return "progress-30";
+      if (this.rating > 3.0 && this.rating <= 3.5) return "progress-35";
+      if (this.rating > 3.5 && this.rating <= 4.0) return "progress-40";
+      if (this.rating > 4.0 && this.rating <= 4.5) return "progress-45";
+      if (this.rating > 4.5 && this.rating <= 5.0) return "progress-50";
+      if (this.rating > 5.0 && this.rating <= 5.5) return "progress-55";
+      if (this.rating > 5.5 && this.rating <= 6.0) return "progress-60";
+      if (this.rating > 6.0 && this.rating <= 6.5) return "progress-65";
+      if (this.rating > 6.5 && this.rating <= 7.0) return "progress-70";
+      if (this.rating > 7.0 && this.rating <= 7.5) return "progress-75";
+      if (this.rating > 7.5 && this.rating <= 8.0) return "progress-80";
+      if (this.rating > 8.0 && this.rating <= 8.5) return "progress-85";
+      if (this.rating > 8.5 && this.rating <= 9.0) return "progress-90";
+      if (this.rating > 9.0 && this.rating <= 9.5) return "progress-95";
+      if ((this.rating = 9.6)) return "progress-96";
+      if ((this.rating = 9.7)) return "progress-97";
+      if ((this.rating = 9.8)) return "progress-98";
+      if ((this.rating = 9.9)) return "progress-99";
+      if ((this.rating = 10)) return "progress-100";
     }
   }
 };

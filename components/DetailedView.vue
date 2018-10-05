@@ -30,8 +30,11 @@
         </nuxt-link>
         <div class="view__btn">
           <button-trailer @click="showTrailer">Watch Trailer</button-trailer>
-          <button-watchlist @click="onAgree" class="view__btn--list">
-            {{ checkWatchlist(this.movie.title) ? "Remove from Watchlist" : "Add to Watchlist" }}
+          <button-watchlist @click="onAgree" class="view__btn--list btn-add" v-if="!checkWatchlist(this.movie.title)">
+            Add to Watchlist
+          </button-watchlist>
+          <button-watchlist @click="onAgree" class="view__btn--list btn-remove" v-if="checkWatchlist(this.movie.title)">
+            Remove from Watchlist
           </button-watchlist>
         </div>
         <p class="view__plot">{{ this.movie.overview.substring(0, 790) }}
@@ -290,8 +293,11 @@ export default {
         return true;
       }
     },
+    // voteAverage() {
+    //   return this.movie.vote_average * 10;
+    // }
     voteAverage() {
-      return this.movie.vote_average * 10;
+      return this.movie.vote_average;
     }
   },
   methods: {
@@ -392,6 +398,24 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/variables";
+
+.btn-add:hover {
+  color: #00d474;
+  background-color: $color-white;
+  font-weight: 700;
+}
+
+.btn-remove:hover {
+  color: $color-secondary;
+  background-color: $color-white;
+  font-weight: 700;
+}
+
+.remove {
+  background-color: #fff;
+  color: $color-secondary;
+  font-weight: 700;
+}
 
 .read-more {
   text-decoration: underline;
@@ -553,15 +577,11 @@ export default {
       border-radius: 10px;
       text-align: center;
       cursor: pointer;
+      transition: all 0.25s ease;
 
       @media (max-width: 1370px) {
         margin-top: 0;
         margin-left: 15px;
-      }
-
-      &:hover {
-        color: $color-secondary;
-        transition: color 0.2s;
       }
     }
   }

@@ -53,7 +53,7 @@ export default {
   }
 
   @media (height: 736px) and (width: 414px) {
-    margin-right: 21px;
+    margin-right: 11px;
   }
 
   @media (max-width: 400px) {

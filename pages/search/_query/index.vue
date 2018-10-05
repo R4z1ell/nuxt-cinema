@@ -150,12 +150,22 @@ export default {
   margin-left: 242%;
   white-space: nowrap;
 
+  @media (height: 736px) and (width: 414px) {
+    margin-left: 22%;
+    max-width: 414px;
+    margin-top: 0px;
+  }
+
   @media (height: 812px) and (width: 375px) {
     margin-left: 13%;
+    max-width: 375px;
+    margin-top: 0px;
   }
 
   @media (height: 640px) and (width: 360px) {
     margin-left: 12%;
+    max-width: 360px;
+    margin-top: 0px;
   }
 }
 </style>

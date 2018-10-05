@@ -459,7 +459,6 @@ export default {
 
 // ! Fix the 'undefined' videos property when clicking on an actor's name
 // ! Create a plugin for the movie score display
-// ! Create a better style for the "Add/Remove to Watchlist" button
 <style lang="scss">
 @import "../../../assets/scss/variables";
 

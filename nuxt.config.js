@@ -38,7 +38,8 @@ module.exports = {
   plugins: [
     "~plugins/genre-filter.js",
     "~plugins/runtime-filter.js",
-    "~plugins/vue-js-modal.js"
+    "~plugins/vue-js-modal.js",
+    "~plugins/rating-filter.js"
   ],
 
   /*
