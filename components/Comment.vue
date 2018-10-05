@@ -78,6 +78,14 @@ export default {
     margin: 0 0 10px 10px;
     padding: 7px;
 
+    @media (max-width: 1000px) {
+      font-size: 17px;
+    }
+
+    @media (max-width: 800px) {
+      font-size: 16px;
+    }
+
     @media (height: 736px) and (width: 414px) {
       font-size: 17px;
     }

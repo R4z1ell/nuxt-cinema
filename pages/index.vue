@@ -133,7 +133,6 @@ export default {
 
 .page-full {
   display: grid;
-  //grid-template-columns: repeat(5, 332.5px);
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 40px;
   padding: 40px;

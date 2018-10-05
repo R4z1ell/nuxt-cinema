@@ -12,7 +12,6 @@
             </g>
           </svg>
         </div>
-        <!-- <p class="notification-detail__container--added">3 days ago</p> -->
         <button-trailer 
           class="notification-detail__trailer" 
           @click="$modal.show('youtube-notification', {trailer: movie.trailerLink})">

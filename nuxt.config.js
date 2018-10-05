@@ -30,7 +30,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ["normalize.css/normalize.css"],
+  css: ["normalize.css/normalize.css", "~assets/scss/base.scss"],
 
   /*
   ** Plugins to load before mounting the App
@@ -58,6 +58,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    postcss: [],
     vendor: ["vue-js-modal"],
     extend(config, ctx) {}
   }

@@ -34,12 +34,6 @@ export default {
   font-weight: 400;
   transition: all 0.25s ease;
 
-  // &:hover {
-  //   background-color: $color-white;
-  //   color: #00d474;
-  //   font-weight: 700;
-  // }
-
   @media (max-width: 500px) {
     margin-left: 0px;
   }

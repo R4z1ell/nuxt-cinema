@@ -191,7 +191,6 @@ export default {
   &__logo-1 {
     width: 150px;
     height: 50px;
-    //margin-right: 14.5%;
     position: absolute;
     left: 46%;
 

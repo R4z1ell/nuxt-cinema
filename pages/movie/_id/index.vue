@@ -1,17 +1,15 @@
 <template>
   <div> 
-    <!-- <modal name="youtube-trailer" :width="1050" :height="600"> -->
-    <modal name="youtube-trailer" width="90%" height="80%">
+    <modal name="youtube-trailer" :adaptive="true">
       <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="100%" width="100%"></iframe>
-      <!-- <iframe :src="`https://www.youtube.com/embed/` + checkIfTrailer" style="border:none;" height="600" width="1050"></iframe> -->
     </modal>
-    <modal name="backdrop-image-1" :width="780" :height="439" v-if="windowWidth > 700">
+    <modal name="backdrop-image-1" :width="780" :height="439" v-if="windowWidth > 695">
       <img :src="imgOne" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
-    <modal name="backdrop-image-2" :width="780" :height="439" v-if="windowWidth > 700">
+    <modal name="backdrop-image-2" :width="780" :height="439" v-if="windowWidth > 695">
       <img :src="imgTwo" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
-    <modal name="backdrop-image-3" :width="780" :height="439" v-if="windowWidth > 700">
+    <modal name="backdrop-image-3" :width="780" :height="439" v-if="windowWidth > 695">
       <img :src="imgThree" alt="backdrop-image" style="{width: 780px, height: 439px}">
     </modal>
     <div class="movie">
@@ -457,8 +455,6 @@ export default {
 };
 </script>
 
-// ! Fix the 'undefined' videos property when clicking on an actor's name
-// ! Create a plugin for the movie score display
 <style lang="scss">
 @import "../../../assets/scss/variables";
 
@@ -864,8 +860,6 @@ export default {
   }
 
   &__image {
-    //width: 381px;
-    //height: 214px;
     width: 90%;
     height: auto;
     border-radius: 10px;
@@ -905,10 +899,8 @@ export default {
   }
 
   &__poster-1 {
-    //width: 487px;
     width: 89%;
     height: auto;
-    //height: 730px;
     margin: 26px 0 0 40px;
 
     @media (height: 912px) and (width: 1368px) {

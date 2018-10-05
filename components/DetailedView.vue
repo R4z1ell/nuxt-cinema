@@ -23,7 +23,7 @@
             active-color="#FF6500"
             :rounded-corners="true"
           ></star-rating>
-          <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp; Vote</p>
+          <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp;<span>Vote</span></p>
         </div>
         <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
           <img :src="image" alt="movie-image" class="view__image-2">
@@ -293,9 +293,6 @@ export default {
         return true;
       }
     },
-    // voteAverage() {
-    //   return this.movie.vote_average * 10;
-    // }
     voteAverage() {
       return this.movie.vote_average;
     }
@@ -630,9 +627,20 @@ export default {
       font-size: 25px;
     }
 
+    @media (height: 1112px) and (width: 834px) {
+      font-size: 21px;
+      text-align: center;
+      margin: 0 0 0 33px;
+    }
+
     @media (max-width: 799px) {
       font-size: 30px;
       margin: 0 0 0 0;
+    }
+
+    @media (height: 1024px) and (width: 768px) {
+      font-size: 25px;
+      text-align: center;
     }
 
     @media (max-width: 720px) {
@@ -691,7 +699,7 @@ export default {
     }
 
     @media (height: 568px) and (width: 320px) {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 
@@ -730,6 +738,7 @@ export default {
 
     @media (height: 568px) and (width: 320px) {
       margin-left: 0px;
+      font-size: 16px;
     }
   }
 }

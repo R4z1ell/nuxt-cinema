@@ -83,6 +83,10 @@ export default {
       height: 343px;
     }
 
+    @media (height: 1024px) and (width: 768px) {
+      height: 310px;
+    }
+
     @media (height: 736px) and (width: 414px) {
       height: 231px;
     }

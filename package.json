@@ -1,7 +1,7 @@
 {
   "name": "vue-cinema",
   "version": "1.0.0",
-  "description": "My bedazzling Nuxt.js project",
+  "description": "Movies Application based on TMDb API",
   "author": "R4z1ell",
   "private": true,
   "scripts": {

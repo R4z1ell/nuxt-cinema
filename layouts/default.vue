@@ -2,15 +2,14 @@
   <div class="scroll">
     <Header class="fixed" @sidenavToggle="displaySidenav = true" />
     <sub-header :style="[windowWidth <= 1007 ? {'margin-top' : '75px'} : {'margin-top' : '129px'}]" class="fixed" />
-    <!-- <sub-header style="margin-top: 130px" class="fixed" /> -->
     <transition name="slide-side">
       <Sidenav v-if="displaySidenav" @close="displaySidenav = false"/>
     </transition>
-    <modal name="youtube-trailer-detail" @before-open="beforeOpenOne" :width="1050" :height="600">
-      <iframe :src="trailerOne" style="border: none" height="600" width="1050"></iframe>
+    <modal name="youtube-trailer-detail" @before-open="beforeOpenOne" :adaptive="true">
+      <iframe :src="trailerOne" style="border: none" height="100%" width="100%"></iframe>
     </modal>
-    <modal name="youtube-notification" @before-open="beforeOpenTwo" :width="1050" :height="600">
-      <iframe :src="trailerTwo" style="border: none" height="600" width="1050"></iframe>
+    <modal name="youtube-notification" @before-open="beforeOpenTwo" :adaptive="true">
+      <iframe :src="trailerTwo" style="border: none" height="100%" width="100%"></iframe>
     </modal>
     <nuxt />
   </div>
