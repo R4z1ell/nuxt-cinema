@@ -1,7 +1,12 @@
 <template>
-  <div class="main"> 
-    <div class="view" :style="[checkIfLastComponent ? {'margin': '25px 0 10px 0'} : {'margin': '25px 0 40px 0'}]">
-      <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
+  <div class="main">
+    <div
+      class="view"
+      :style="[checkIfLastComponent ? {'margin': '25px 0 10px 0'} : {'margin': '25px 0 40px 0'}]"
+    >
+      <nuxt-link
+        :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}"
+      >
         <img :src="image" alt="movie-image" class="view__image-1">
       </nuxt-link>
       <div class="wrapper">
@@ -9,36 +14,48 @@
           <h1 class="view__title">{{ checkTitle }}</h1>
         </div>
         <p class="view__genre">
-          {{ this.movie.genre_ids[0] | genre }} {{ checkIfTwoGenres }} {{ this.movie.genre_ids[1] | genre }} 
-          &nbsp; &#8901; &nbsp; {{ checkReleaseDate }} 
+          {{ this.movie.genre_ids[0] | genre }} {{ checkIfTwoGenres }} {{ this.movie.genre_ids[1] | genre }}
+          &nbsp; &#8901; &nbsp; {{ checkReleaseDate }}
         </p>
         <div class="view__stars">
           <circle-bar style="margin-left: 27px" :rating="voteAverage"></circle-bar>
-          <star-rating  
+          <star-rating
             style="margin-bottom: 7px"
-            class="stars" 
-            :increment="0.5" 
-            :star-size="this.checkWidth" 
-            :show-rating="false" 
+            class="stars"
+            :increment="0.5"
+            :star-size="this.checkWidth"
+            :show-rating="false"
             active-color="#FF6500"
             :rounded-corners="true"
           ></star-rating>
-          <p class="view__stars--count">{{ this.movie.vote_count }} &nbsp;<span>Vote</span></p>
+          <p class="view__stars--count">
+            {{ this.movie.vote_count }} &nbsp;
+            <span>Vote</span>
+          </p>
         </div>
-        <nuxt-link :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}">
+        <nuxt-link
+          :to="{path: movieLink, params: {id: this.movie.id}, query: { img: this.movie.poster_path, link: this.$route.path}}"
+        >
           <img :src="image" alt="movie-image" class="view__image-2">
         </nuxt-link>
         <div class="view__btn">
           <button-trailer @click="showTrailer">Watch Trailer</button-trailer>
-          <button-watchlist @click="onAgree" class="view__btn--list btn-add" v-if="!checkWatchlist(this.movie.title)">
-            Add to Watchlist
-          </button-watchlist>
-          <button-watchlist @click="onAgree" class="view__btn--list btn-remove" v-if="checkWatchlist(this.movie.title)">
-            Remove from Watchlist
-          </button-watchlist>
+          <button-watchlist
+            @click="onAgree"
+            class="view__btn--list btn-add"
+            v-if="!checkWatchlist(this.movie.title)"
+          >Add to Watchlist</button-watchlist>
+          <button-watchlist
+            @click="onAgree"
+            class="view__btn--list btn-remove"
+            v-if="checkWatchlist(this.movie.title)"
+          >Remove from Watchlist</button-watchlist>
         </div>
-        <p class="view__plot">{{ this.movie.overview.substring(0, 790) }}
-          <span v-if="!readMore">{{ this.movie.overview.substring(790,this.movie.overview.length) }}</span>
+        <p class="view__plot">
+          {{ this.movie.overview.substring(0, 790) }}
+          <span
+            v-if="!readMore"
+          >{{ this.movie.overview.substring(790,this.movie.overview.length) }}</span>
           <span v-if="this.checkOverviewLength">{{ checkDot }}</span>
           <span v-if="this.checkOverviewLength" class="read-more" @click="readMore = !readMore">
             {{ this.readMoreOrLess }}
@@ -48,7 +65,10 @@
         </p>
       </div>
     </div>
-    <span class="view__split" :style="[checkIfLastComponent ? {'height': '0px'} : {'height': '1px'}]"></span>
+    <span
+      class="view__split"
+      :style="[checkIfLastComponent ? {'height': '0px'} : {'height': '1px'}]"
+    ></span>
   </div>
 </template>
 

@@ -17,7 +17,6 @@
       <div class="header__wrapper">
         <search-bar />
         <Notification @alert="alertDetail = !alertDetail"/>
-        <Profile @show="toggleDetail = !toggleDetail" v-if="false"/>
         <account-detail v-if="toggleDetail" v-on-clickaway="awayAccount"/>
         <svg v-if="alertDetail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="arrow" version="1.1" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 292.362 292.361" style="enable-background:new 0 0 292.362 292.361;" xml:space="preserve">
           <g>
@@ -35,7 +34,6 @@ import { mixin as clickaway } from "vue-clickaway";
 import Hamburger from "@/components/Hamburger";
 import SearchBar from "@/components/SearchBar";
 import Notification from "@/components/Notification";
-import Profile from "@/components/Profile";
 import AccountDetail from "@/components/UI/Details/AccountDetail";
 import NotificationDetail from "@/components/UI/Details/NotificationDetail";
 
@@ -51,7 +49,6 @@ export default {
     Hamburger,
     SearchBar,
     Notification,
-    Profile,
     AccountDetail,
     NotificationDetail
   },
