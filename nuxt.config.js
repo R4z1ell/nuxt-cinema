@@ -45,7 +45,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/dotenv'],
+  modules: [],
 
   env: {
     apiKey: 'e280a15596646f3be8074283fd37f3c8'
