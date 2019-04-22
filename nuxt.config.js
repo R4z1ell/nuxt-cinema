@@ -1,5 +1,4 @@
 const pkg = require('./package');
-require('dotenv').config();
 
 module.exports = {
   mode: 'universal',
@@ -49,7 +48,7 @@ module.exports = {
   modules: ['@nuxtjs/dotenv'],
 
   env: {
-    apiKey: process.env.API_KEY
+    apiKey: 'e280a15596646f3be8074283fd37f3c8'
   },
 
   /*
